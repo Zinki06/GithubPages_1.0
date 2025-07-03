@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 웹사이트 포트폴리오</title>
+    <meta name="description" content="다양한 웹 프로젝트들을 한 곳에서 만나보세요">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 섹션 -->
+        <header class="header">
+            <h1 class="main-title">웹사이트 포트폴리오</h1>
+            <p class="subtitle">다양한 프로젝트들을 탐색해보세요</p>
+        </header>
+
+        <!-- 검색 및 필터 섹션 -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="프로젝트 검색..." class="search-input">
+                <div class="filter-tags">
+                    <button class="tag-btn active" data-tag="all">전체</button>
+                    <button class="tag-btn" data-tag="HTML">HTML</button>
+                    <button class="tag-btn" data-tag="CSS">CSS</button>
+                    <button class="tag-btn" data-tag="JavaScript">JavaScript</button>
+                    <button class="tag-btn" data-tag="React">React</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 프로젝트 갤러리 -->
+        <main class="projects-grid" id="projectsGrid">
+            <!-- 프로젝트 카드들이 JavaScript로 동적 생성됩니다 -->
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <!-- 저작권 문구 제거됨 -->
+        </footer>
+    </div>
+
+    <!-- 로딩 스피너 -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>프로젝트를 불러오는 중...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
