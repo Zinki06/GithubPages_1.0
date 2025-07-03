@@ -1,0 +1,214 @@
+/* 가이드라인 Rule: 매직 넘버 대신 이름 있는 상수를 사용 */
+:root {
+    --bg-dark: #121212;
+    --bg-card: #1E1E1E;
+    --text-primary: #E0E0E0;
+    --text-secondary: #B0B0B0;
+    --accent-blue: #2979FF;
+    --accent-green: #00E676;
+    --border-color: #333333;
+    --font-main: 'Noto Sans KR', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+    --transition-speed: 400ms;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* 가이드라인 Rule: 응집도 - UI 요소를 재사용 가능한 컴포넌트 단위로 설계 */
+#presentation-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.slide {
+    /* 가이드라인 Rule: 결합도 - CSS 전환을 활용한 상태와 표현의 분리 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5rem 6rem;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .slide {
+        padding: 4rem 2rem;
+    }
+}
+
+h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; }
+h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: var(--accent-blue); }
+h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+h4 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+p { font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin-bottom: 1.5rem; color: var(--text-secondary); }
+
+.card-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(41, 121, 255, 0.2);
+}
+.card i {
+    font-size: 2.5rem;
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+}
+
+pre, code {
+    font-family: var(--font-code);
+    background-color: #282c34;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+pre {
+    padding: 1.5rem;
+    text-align: left;
+    width: 100%;
+    max-width: 700px;
+    margin: 1rem auto;
+    white-space: pre-wrap;
+}
+
+.code-block {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: var(--font-code);
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+.code-block .token.keyword { color: #c678dd; }
+.code-block .token.string { color: #98c379; }
+.code-block .token.number { color: #d19a66; }
+.code-block .token.comment { color: #5c6370; }
+
+/* Navigation */
+.nav-button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+.nav-button:hover { background-color: rgba(41, 121, 255, 0.5); }
+#prev-btn { left: 20px; }
+#next-btn { right: 20px; }
+
+/* Progress Bar */
+.progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+    width: 0%;
+    transition: width var(--transition-speed) ease-out;
+    z-index: 1000;
+}
+
+/* Architecture Diagram Styles */
+#architecture-diagram {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    height: 300px;
+    margin: 2rem 0;
+}
+.arch-component {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px 30px;
+    z-index: 10;
+    text-align: center;
+    min-width: 120px;
+}
+.arch-component i { 
+    font-size: 3rem; 
+    margin-bottom: 0.5rem; 
+    display: block;
+    color: var(--accent-blue);
+}
+.arch-component h4 { 
+    font-size: 1.2rem; 
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+.arch-component p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.arch-arrow {
+    position: absolute;
+    font-size: 1rem;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    z-index: 5;
+}
+
+/* Grid 레이아웃을 위한 유틸리티 */
+.grid {
+    display: grid;
+}
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+} 

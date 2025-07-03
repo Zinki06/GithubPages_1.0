@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 시대, 비개발자를 위한 개발 지식</title>
+    <title>비개발자를 위한 개발 용어 사전</title>
     
     <!-- Google Fonts: Pretendard (본문), JetBrains Mono (코드) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,391 +16,303 @@
     <!-- Tailwind CSS for utility classes -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        /* 가이드라인 Rule: 매직 넘버 대신 이름 있는 상수를 사용 */
-        :root {
-            --bg-dark: #121212;
-            --bg-card: #1E1E1E;
-            --text-primary: #E0E0E0;
-            --text-secondary: #B0B0B0;
-            --accent-blue: #2979FF;
-            --accent-green: #00E676;
-            --border-color: #333333;
-            --font-main: 'Noto Sans KR', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
-            --transition-speed: 400ms;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 가이드라인 Rule: 응집도 - UI 요소를 재사용 가능한 컴포넌트 단위로 설계 */
-        #presentation-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .slide {
-            /* 가이드라인 Rule: 결합도 - CSS 전환을 활용한 상태와 표현의 분리 */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 5rem 6rem;
-            box-sizing: border-box;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .slide.active {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        
-        /* 반응형 디자인 */
-        @media (max-width: 768px) {
-            .slide {
-                padding: 4rem 2rem;
-            }
-        }
-
-        h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; }
-        h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: var(--accent-blue); }
-        p { font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin-bottom: 1.5rem; color: var(--text-secondary); }
-        
-        .card-container {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 300px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(41, 121, 255, 0.2);
-        }
-        .card i {
-            font-size: 2.5rem;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-        }
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        pre, code {
-            font-family: var(--font-code);
-            background-color: #282c34;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        pre {
-            padding: 1.5rem;
-            text-align: left;
-            width: 100%;
-            max-width: 700px;
-            margin: 1rem auto;
-            white-space: pre-wrap;
-        }
-        
-        .code-block {
-            background-color: #282c34;
-            color: #abb2bf;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: var(--font-code);
-            text-align: left;
-            width: 100%;
-            max-width: 600px;
-        }
-        .code-block .token.keyword { color: #c678dd; }
-        .code-block .token.string { color: #98c379; }
-        .code-block .token.number { color: #d19a66; }
-        .code-block .token.comment { color: #5c6370; }
-
-
-        /* Navigation */
-        .nav-button {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            z-index: 1000;
-        }
-        .nav-button:hover { background-color: rgba(41, 121, 255, 0.5); }
-        #prev-btn { left: 20px; }
-        #next-btn { right: 20px; }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
-            width: 0%;
-            transition: width var(--transition-speed) ease-out;
-            z-index: 1000;
-        }
-        
-        /* Architecture Diagram Styles */
-        #architecture-diagram {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            max-width: 900px;
-            position: relative;
-            height: 300px;
-        }
-        .arch-component {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px 30px;
-            z-index: 10;
-        }
-        .arch-component i { font-size: 3rem; margin-bottom: 0.5rem; }
-        .arch-component h4 { font-size: 1.2rem; }
-        
-        #arch-arrow {
-            position: absolute;
-            font-size: 2rem;
-            color: var(--accent-green);
-            opacity: 0;
-            transition: all 0.5s ease-in-out;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
     <div id="presentation-container">
         <!-- Slide 0: Title -->
         <section class="slide active" data-slide-id="0">
-            <i class="fa-solid fa-brain fa-3x" style="color: var(--accent-blue); margin-bottom: 1.5rem;"></i>
-            <h1>AI 시대, 비개발자를 위한 개발 지식</h1>
-            <p>AI가 코드를 짜주는 시대, 왜 우리는 여전히 개발을 알아야 할까요?<br>AI와 협업하여 '내 아이디어'를 현실로 만들기 위한 최소한의 지식을 알아봅니다.</p>
+            <i class="fa-solid fa-book fa-3x" style="color: var(--accent-blue); margin-bottom: 1.5rem;"></i>
+            <h1>비개발자를 위한 개발 용어 사전</h1>
+            <p>개발자와 소통하거나 IT 프로젝트에 참여할 때 꼭 알아야 할<br>기본 개발 용어들을 쉬운 비유와 함께 알아봅시다.</p>
             <span class="mt-8 text-gray-400">키보드 방향키 또는 화면의 버튼으로 시작하세요.</span>
         </section>
 
-        <!-- Slide 1: GUI vs CLI -->
+        <!-- Slide 1: 코드와 프로그래밍 -->
         <section class="slide" data-slide-id="1">
-            <h2><i class="fas fa-desktop"></i> GUI vs <i class="fas fa-terminal"></i> CLI</h2>
-            <p>우리가 매일 사용하는 '클릭'과 '드래그'의 세상(GUI)과, 개발자들이 '명령어'를 입력하는 세상(CLI)의 차이를 알아봅니다.</p>
+            <h2><i class="fas fa-code"></i> 코드(Code)와 프로그래밍(Programming)</h2>
+            <p>컴퓨터가 이해할 수 있는 언어로 작성된 명령어 집합이 바로 '코드'입니다.</p>
             <div class="card-container">
                 <div class="card">
-                    <i class="fas fa-mouse-pointer"></i>
-                    <h3>GUI (Graphical User Interface)</h3>
-                    <p class="text-sm">아이콘, 버튼, 창 등 그래픽을 통해 컴퓨터와 소통하는 방식. 직관적이고 사용하기 쉽습니다.</p>
+                    <i class="fas fa-file-code"></i>
+                    <h3>코드 (Code)</h3>
+                    <p class="text-sm">요리 레시피처럼 컴퓨터에게 "이렇게 해라"라고 알려주는 글입니다. 예: "사용자가 버튼을 누르면 팝업창을 띄워라"</p>
                 </div>
                 <div class="card">
-                    <i class="fas fa-keyboard"></i>
-                    <h3>CLI (Command Line Interface)</h3>
-                    <p class="text-sm">텍스트 명령어를 입력하여 컴퓨터를 직접 제어하는 방식. 개발 환경 설정, 패키지 설치 등 강력한 작업에 필수적입니다.</p>
+                    <i class="fas fa-cog"></i>
+                    <h3>프로그래밍 (Programming)</h3>
+                    <p class="text-sm">코드를 작성하는 행위입니다. 마치 요리사가 레시피를 만드는 것처럼 개발자가 코드를 만드는 과정입니다.</p>
                 </div>
             </div>
+            <p class="mt-4 text-sm text-gray-400">💡 "코드를 짠다" = "프로그램을 만든다"는 뜻입니다.</p>
         </section>
 
-        <!-- Slide 2: Terminal -->
+        <!-- Slide 2: 프로그래밍 언어 -->
         <section class="slide" data-slide-id="2">
-            <h2><i class="fas fa-terminal"></i> 터미널: 컴퓨터와 대화하는 창구</h2>
-            <p>CLI 명령어를 입력하는 곳이 바로 '터미널'입니다. AI가 "이 명령어를 입력하세요"라고 할 때, 바로 이곳을 사용합니다.</p>
-            <pre><code class="language-bash"># AI가 이런 명령어를 알려줄 때...
-pip install pandas
-
-# ...터미널에 입력하면 필요한 도구가 설치됩니다.
-# Windows: cmd 또는 PowerShell
-# macOS: Terminal 앱</code></pre>
-            <p class="mt-4 text-sm text-gray-400">VS Code 같은 코드 편집기 내에도 터미널 기능이 내장되어 있습니다.</p>
-        </section>
-
-        <!-- Slide 3: Language vs Framework -->
-        <section class="slide" data-slide-id="3">
-            <h2><i class="fas fa-puzzle-piece"></i> 언어 vs 프레임워크</h2>
-            <p>프로그래밍 '언어'는 재료, '프레임워크'는 요리법(레시피)과 같습니다.<br>효율적인 개발을 위해 미리 짜놓은 구조가 프레임워크입니다.</p>
-            <div class="flex flex-col md:flex-row gap-8 items-start">
-                <div class="text-left p-6 bg-gray-800 rounded-lg">
-                    <h3 class="text-xl font-bold mb-2"><i class="fa-solid fa-language text-blue-400"></i> 프로그래밍 언어</h3>
-                    <p class="text-gray-300">컴퓨터와 소통하기 위한 문법 규칙.</p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-yellow-500 text-black text-sm font-bold mr-2 px-2.5 py-0.5 rounded">JavaScript</span>
-                        <span class="inline-block bg-blue-500 text-white text-sm font-bold mr-2 px-2.5 py-0.5 rounded">Python</span>
-                        <span class="inline-block bg-red-500 text-white text-sm font-bold mr-2 px-2.5 py-0.5 rounded">Java</span>
+            <h2><i class="fas fa-language"></i> 프로그래밍 언어</h2>
+            <p>사람이 영어, 한국어로 대화하듯 컴퓨터와 대화하기 위한 언어입니다.<br>각각 특징과 용도가 다릅니다.</p>
+            <div class="flex flex-col gap-4 w-full max-w-4xl">
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center gap-4 mb-2">
+                        <span class="bg-yellow-400 text-black px-3 py-1 rounded font-bold">JavaScript</span>
+                        <span class="text-gray-300">웹사이트를 움직이게 하는 언어 (버튼 클릭, 애니메이션 등)</span>
                     </div>
                 </div>
-                <div class="text-left p-6 bg-gray-800 rounded-lg">
-                    <h3 class="text-xl font-bold mb-2"><i class="fa-solid fa-cogs text-green-400"></i> 프레임워크</h3>
-                    <p class="text-gray-300">언어를 사용해 효율적으로 개발하기 위한 뼈대/구조.</p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-cyan-400 text-black text-sm font-bold mr-2 px-2.5 py-0.5 rounded">React (JS)</span>
-                        <span class="inline-block bg-green-600 text-white text-sm font-bold mr-2 px-2.5 py-0.5 rounded">Next.js (JS)</span>
-                        <span class="inline-block bg-gray-200 text-black text-sm font-bold mr-2 px-2.5 py-0.5 rounded">Django (Python)</span>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center gap-4 mb-2">
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded font-bold">Python</span>
+                        <span class="text-gray-300">데이터 분석, AI 개발에 많이 쓰이는 쉬운 언어</span>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center gap-4 mb-2">
+                        <span class="bg-red-500 text-white px-3 py-1 rounded font-bold">Java</span>
+                        <span class="text-gray-300">대기업 시스템, 안드로이드 앱 개발에 주로 사용</span>
                     </div>
                 </div>
             </div>
+            <p class="mt-4 text-sm text-gray-400">💡 각 언어마다 문법이 조금씩 다르지만, 기본 개념은 비슷합니다.</p>
+        </section>
+
+        <!-- Slide 3: 프론트엔드 vs 백엔드 -->
+        <section class="slide" data-slide-id="3">
+            <h2><i class="fas fa-layer-group"></i> 프론트엔드 vs 백엔드</h2>
+            <p>웹사이트나 앱은 크게 '보이는 부분'과 '보이지 않는 부분'으로 나뉩니다.</p>
+            <div class="flex flex-col md:flex-row gap-8 items-start w-full max-w-4xl">
+                <div class="text-left p-6 bg-gray-800 rounded-lg flex-1">
+                    <h3 class="text-xl font-bold mb-2"><i class="fa-solid fa-desktop text-blue-400"></i> 프론트엔드</h3>
+                    <p class="text-gray-300 mb-3">사용자가 직접 보고 만지는 부분</p>
+                    <div class="text-sm text-gray-400">
+                        <p>• 버튼, 메뉴, 화면 디자인</p>
+                        <p>• 클릭했을 때 반응</p>
+                        <p>• 카페 매장의 인테리어와 메뉴판</p>
+                    </div>
+                </div>
+                <div class="text-left p-6 bg-gray-800 rounded-lg flex-1">
+                    <h3 class="text-xl font-bold mb-2"><i class="fa-solid fa-server text-green-400"></i> 백엔드</h3>
+                    <p class="text-gray-300 mb-3">사용자가 보지 못하는 뒤쪽 처리</p>
+                    <div class="text-sm text-gray-400">
+                        <p>• 데이터 저장, 계산, 처리</p>
+                        <p>• 로그인, 결제 처리</p>
+                        <p>• 카페 주방과 재료 창고</p>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-400">💡 "풀스택 개발자" = 프론트엔드와 백엔드를 모두 할 수 있는 개발자</p>
         </section>
         
-        <!-- Slide 4: Software Architecture -->
+        <!-- Slide 4: 데이터베이스와 서버 -->
         <section class="slide" data-slide-id="4">
-            <h2><i class="fas fa-sitemap"></i> 소프트웨어 작동 원리 (간단히)</h2>
-            <p>우리가 보는 화면(프론트엔드)과 보이지 않는 곳에서 일하는 서버(백엔드), 그리고 정보를 저장하는 창고(DB)로 구성됩니다.</p>
-            <!-- 가이드라인 Rule: 결합도 - 동적 콘텐츠 생성을 통한 HTML과 로직의 결합도 최소화 -->
+            <h2><i class="fas fa-database"></i> 데이터베이스(DB)와 서버</h2>
+            <p>정보를 저장하고 처리하는 컴퓨터 시스템들입니다.</p>
             <div id="architecture-diagram">
                 <div id="arch-client" class="arch-component">
                     <i class="fas fa-mobile-alt"></i>
-                    <h4>프론트엔드 (클라이언트)</h4>
+                    <h4>사용자<br>(클라이언트)</h4>
+                    <p class="text-xs mt-2">스마트폰, 컴퓨터</p>
                 </div>
                 <div id="arch-server" class="arch-component">
                     <i class="fas fa-server"></i>
-                    <h4>백엔드 (서버)</h4>
+                    <h4>서버</h4>
+                    <p class="text-xs mt-2">요청을 처리하는 컴퓨터</p>
                 </div>
                 <div id="arch-db" class="arch-component">
                     <i class="fas fa-database"></i>
-                    <h4>데이터베이스 (DB)</h4>
+                    <h4>데이터베이스</h4>
+                    <p class="text-xs mt-2">정보 저장소</p>
                 </div>
-                <!-- 화살표는 JS로 동적 생성 및 제어 -->
+            </div>
+            <div class="mt-6 text-left max-w-2xl">
+                <p class="text-sm text-gray-300">
+                    <strong>서버:</strong> 24시간 켜져있는 강력한 컴퓨터. 은행의 ATM기계처럼 요청을 받아 처리<br>
+                    <strong>데이터베이스:</strong> 엑셀처럼 정보를 체계적으로 저장하는 거대한 파일 시스템
+                </p>
             </div>
         </section>
 
-        <!-- Slide 5: Development to Deployment -->
+        <!-- Slide 5: API와 통신 -->
         <section class="slide" data-slide-id="5">
-            <h2><i class="fas fa-rocket"></i> 로컬 개발에서 배포까지</h2>
-            <p>내 컴퓨터(로컬)에서 만든 프로그램을 다른 사람들도 쓸 수 있도록 인터넷 세상(서버)에 공개하는 과정을 '배포'라고 합니다.</p>
+            <h2><i class="fas fa-exchange-alt"></i> API (에이피아이)</h2>
+            <p>Application Programming Interface - 서로 다른 프로그램이 대화하는 방법입니다.</p>
             <div class="card-container">
                 <div class="card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>로컬(Local) 환경</h3>
-                    <p class="text-sm">개발자의 개인 컴퓨터. 여기서 코드를 작성하고 테스트합니다.</p>
+                    <i class="fas fa-plug"></i>
+                    <h3>API란?</h3>
+                    <p class="text-sm">카페에서 주문받는 직원처럼, 요청을 받아 적절한 응답을 돌려주는 연결고리입니다.</p>
                 </div>
                 <div class="card">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>배포(Deployment)</h3>
-                    <p class="text-sm">작성된 코드를 AWS, Vercel 같은 클라우드 서버에 올려 인터넷을 통해 누구나 접속할 수 있게 만듭니다.</p>
+                    <i class="fas fa-comments"></i>
+                    <h3>실제 예시</h3>
+                    <p class="text-sm">"날씨 API"에 "서울 날씨"를 요청하면 "맑음, 25도"라는 정보를 받습니다.</p>
                 </div>
             </div>
+            <div class="code-block text-sm mt-4">
+                <p class="mb-2 font-bold">API 요청 예시:</p>
+                <pre><code>요청: "오늘 서울 날씨 알려줘"
+응답: { "지역": "서울", "날씨": "맑음", "온도": "25도" }</code></pre>
+            </div>
+            <p class="mt-4 text-sm text-gray-400">💡 카카오톡 로그인, 결제 시스템도 모두 API를 통해 작동합니다.</p>
         </section>
 
-        <!-- Slide 6: Essential Tools -->
+        <!-- Slide 6: 개발 환경과 도구들 -->
         <section class="slide" data-slide-id="6">
-            <h2><i class="fas fa-tools"></i> 개발 환경 세팅하기</h2>
-            <p>AI와 함께 개발을 시작하기 위해 필요한 기본 도구들입니다.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
-                <div class="p-4 bg-gray-800 rounded-lg text-center">
+            <h2><i class="fas fa-tools"></i> 개발 환경과 도구들</h2>
+            <p>개발자들이 사용하는 주요 도구들을 알아봅시다.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                <div class="p-4 bg-gray-800 rounded-lg">
                     <i class="fa-solid fa-code text-2xl mb-2 text-blue-400"></i>
-                    <h4 class="font-bold">IDE (코드 편집기)</h4>
-                    <p class="text-sm text-gray-400">Cursor, VS Code 등 코드를 작성하고 AI와 대화하는 공간.</p>
+                    <h4 class="font-bold mb-2">IDE (통합개발환경)</h4>
+                    <p class="text-sm text-gray-400">코드를 작성하는 프로그램. 워드프로세서의 개발자 버전</p>
+                    <p class="text-xs text-gray-500 mt-1">예: VS Code, IntelliJ</p>
                 </div>
-                <div class="p-4 bg-gray-800 rounded-lg text-center">
-                    <i class="fa-solid fa-box-open text-2xl mb-2 text-green-400"></i>
-                    <h4 class="font-bold">패키지 매니저</h4>
-                    <p class="text-sm text-gray-400">`pip`(Python), `npm`(Node.js) 등 유용한 코드 묶음(라이브러리)을 쉽게 설치.</p>
-                </div>
-                <div class="p-4 bg-gray-800 rounded-lg text-center">
+                <div class="p-4 bg-gray-800 rounded-lg">
                     <i class="fab fa-github text-2xl mb-2 text-white"></i>
-                    <h4 class="font-bold">Github</h4>
-                    <p class="text-sm text-gray-400">코드의 버전을 관리하고 다른 사람과 협업하기 위한 필수 서비스.</p>
+                    <h4 class="font-bold mb-2">Git/GitHub</h4>
+                    <p class="text-sm text-gray-400">코드의 변경사항을 기록하고 백업하는 시스템</p>
+                    <p class="text-xs text-gray-500 mt-1">구글 드라이브의 개발자 버전</p>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-lg">
+                    <i class="fa-solid fa-terminal text-2xl mb-2 text-green-400"></i>
+                    <h4 class="font-bold mb-2">터미널/CLI</h4>
+                    <p class="text-sm text-gray-400">명령어로 컴퓨터를 조작하는 검은 화면</p>
+                    <p class="text-xs text-gray-500 mt-1">DOS 시절의 까만 화면</p>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-lg">
+                    <i class="fa-solid fa-box text-2xl mb-2 text-purple-400"></i>
+                    <h4 class="font-bold mb-2">라이브러리/패키지</h4>
+                    <p class="text-sm text-gray-400">미리 만들어진 코드 묶음. 레고 블록 같은 것</p>
+                    <p class="text-xs text-gray-500 mt-1">npm, pip로 설치</p>
                 </div>
             </div>
         </section>
         
-        <!-- Slide 7: Data Formats -->
+        <!-- Slide 7: 웹 개발 기초 용어 -->
         <section class="slide" data-slide-id="7">
-            <h2><i class="fas fa-file-alt"></i> 컴퓨터가 좋아하는 데이터 형식</h2>
-            <p>AI에게 정보를 효과적으로 전달하려면 컴퓨터가 이해하기 쉬운 형식(Markdown, JSON, CSV)을 사용하는 것이 좋습니다.</p>
-            <div class="flex flex-col md:flex-row gap-4 w-full max-w-5xl">
-                <div class="flex-1">
-                    <h3 class="font-bold mb-2">JSON (JavaScript Object Notation)</h3>
-                    <div class="code-block text-sm">
-                        <pre><code>{
-  <span class="token.string">"이름"</span>: <span class="token.string">"지민"</span>,
-  <span class="token.string">"나이"</span>: <span class="token.number">14</span>,
-  <span class="token.string">"학교"</span>: <span class="token.string">"강남중"</span>
-}</code></pre>
+            <h2><i class="fas fa-globe"></i> 웹 개발 기초 용어</h2>
+            <p>웹사이트를 만들 때 사용하는 핵심 기술들입니다.</p>
+            <div class="flex flex-col gap-4 w-full max-w-5xl">
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center gap-4 mb-2">
+                        <span class="bg-orange-500 text-white px-3 py-1 rounded font-bold">HTML</span>
+                        <span class="text-gray-300">웹페이지의 골격. 제목, 문단, 이미지 등의 구조를 만듦</span>
                     </div>
+                    <p class="text-xs text-gray-500 ml-16">집을 지을 때 기둥과 벽을 세우는 것</p>
                 </div>
-                <div class="flex-1">
-                    <h3 class="font-bold mb-2">Markdown</h3>
-                    <div class="code-block text-sm">
-                        <pre><code><span class="token.comment"># 제목 (h1)</span>
-<span class="token.keyword">-</span> 리스트 항목 1
-<span class="token.keyword">-</span> **굵은** 글씨
-<span class="token.keyword">-</span> *기울인* 글씨</code></pre>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center gap-4 mb-2">
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded font-bold">CSS</span>
+                        <span class="text-gray-300">웹페이지의 디자인. 색깔, 크기, 위치 등을 꾸며줌</span>
                     </div>
+                    <p class="text-xs text-gray-500 ml-16">집에 페인트칠하고 가구를 배치하는 것</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center gap-4 mb-2">
+                        <span class="bg-yellow-400 text-black px-3 py-1 rounded font-bold">JavaScript</span>
+                        <span class="text-gray-300">웹페이지를 움직이게 함. 클릭하면 반응하는 모든 기능</span>
+                    </div>
+                    <p class="text-xs text-gray-500 ml-16">집에 전등 스위치와 자동문을 설치하는 것</p>
                 </div>
             </div>
+            <p class="mt-4 text-sm text-gray-400">💡 HTML + CSS + JavaScript = 완전한 웹페이지</p>
         </section>
 
-        <!-- Slide 8: Vibe Coding Tips -->
+        <!-- Slide 8: 개발 프로세스 용어 -->
         <section class="slide" data-slide-id="8">
-            <h2><i class="fas fa-lightbulb"></i> AI와 협업('바이브 코딩') 잘하는 법</h2>
-            <p>AI에게 일을 맡길 때, 더 좋은 결과를 얻기 위한 몇 가지 실용적인 팁입니다.</p>
-            <div class="text-left max-w-2xl w-full space-y-4">
+            <h2><i class="fas fa-project-diagram"></i> 개발 프로세스 용어</h2>
+            <p>개발 프로젝트에서 자주 나오는 용어들입니다.</p>
+            <div class="text-left max-w-4xl w-full space-y-4">
                 <div class="bg-gray-800 p-4 rounded-lg flex items-start gap-4">
-                    <i class="fa-solid fa-list-check text-2xl text-blue-400 mt-1"></i>
+                    <i class="fa-solid fa-bug text-2xl text-red-400 mt-1"></i>
                     <div>
-                        <h4 class="font-bold">1. 계획부터 세우고 허락받기</h4>
-                        <p class="text-sm text-gray-300">"바로 만들지 말고, 어떻게 만들지 계획부터 설명해줘."<br>AI가 마음대로 파일을 망가뜨리는 것을 방지할 수 있습니다.</p>
+                        <h4 class="font-bold">버그(Bug) / 디버깅(Debugging)</h4>
+                        <p class="text-sm text-gray-300">프로그램의 오류. 의도와 다르게 작동하는 것을 고치는 작업</p>
+                        <p class="text-xs text-gray-500">예: 버튼을 눌렀는데 아무 반응이 없음</p>
                     </div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg flex items-start gap-4">
-                    <i class="fa-solid fa-ruler-combined text-2xl text-green-400 mt-1"></i>
+                    <i class="fa-solid fa-rocket text-2xl text-green-400 mt-1"></i>
                     <div>
-                        <h4 class="font-bold">2. 명확한 규칙(Rules) 설정하기</h4>
-                        <p class="text-sm text-gray-300">"언어는 Python 3.10 버전을 사용해." 와 같이 반복적인 지침을 문서로 저장해두면 AI가 일관성 있게 작업합니다.</p>
+                        <h4 class="font-bold">배포(Deploy)</h4>
+                        <p class="text-sm text-gray-300">완성된 프로그램을 실제 사용자들이 쓸 수 있도록 인터넷에 올리는 것</p>
+                        <p class="text-xs text-gray-500">책을 써서 서점에 진열하는 것과 비슷</p>
                     </div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg flex items-start gap-4">
-                    <i class="fa-solid fa-floppy-disk text-2xl text-purple-400 mt-1"></i>
+                    <i class="fa-solid fa-vial text-2xl text-blue-400 mt-1"></i>
                     <div>
-                        <h4 class="font-bold">3. Github로 자주 저장하기 (Commit & Push)</h4>
-                        <p class="text-sm text-gray-300">작업 단계를 자주 저장하여 AI의 실수나 예기치 않은 오류로부터 안전하게 코드를 보호하고, 언제든 이전 버전으로 돌아갈 수 있습니다.</p>
+                        <h4 class="font-bold">테스트(Test)</h4>
+                        <p class="text-sm text-gray-300">프로그램이 제대로 작동하는지 확인하는 과정</p>
+                        <p class="text-xs text-gray-500">요리를 하고 간을 맞춰보는 것</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg flex items-start gap-4">
+                    <i class="fa-solid fa-code-branch text-2xl text-purple-400 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold">버전 관리</h4>
+                        <p class="text-sm text-gray-300">코드의 변경 사항을 추적하고 관리하는 시스템</p>
+                        <p class="text-xs text-gray-500">문서의 "변경 내용 추적" 기능과 비슷</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 9: Conclusion -->
+        <!-- Slide 9: 자주 나오는 IT 용어 -->
         <section class="slide" data-slide-id="9">
-            <i class="fas fa-flag-checkered fa-3x" style="color: var(--accent-green); margin-bottom: 1.5rem;"></i>
-            <h2>이제, 당신의 아이디어를 만들 시간</h2>
-            <p>개발 지식은 더 이상 개발자만의 전유물이 아닙니다.<br>기초를 이해하고 AI라는 강력한 도구를 활용하여, 상상했던 것을 직접 만들어보세요.</p>
-            <p class="mt-8 text-sm text-gray-400">이 프레젠테이션은 요청하신 아티클과 디자인 가이드라인을 기반으로<br>HTML, CSS, JavaScript를 사용하여 제작되었습니다.</p>
+            <h2><i class="fas fa-lightbulb"></i> 자주 나오는 IT 용어</h2>
+            <p>회사에서 개발자와 대화할 때 알아두면 좋은 용어들입니다.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl text-left">
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">🔄 프레임워크 vs 라이브러리</h4>
+                    <p class="text-xs text-gray-300">프레임워크는 집의 뼈대, 라이브러리는 가구</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">☁️ 클라우드</h4>
+                    <p class="text-xs text-gray-300">인터넷으로 접근하는 컴퓨터 서비스 (AWS, Azure)</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">🏗️ 아키텍처</h4>
+                    <p class="text-xs text-gray-300">시스템의 전체적인 구조와 설계</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">📱 반응형 디자인</h4>
+                    <p class="text-xs text-gray-300">PC, 모바일에서 모두 잘 보이는 웹페이지</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">🔐 보안 (Security)</h4>
+                    <p class="text-xs text-gray-300">해킹 방지, 개인정보 보호 등</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">⚡ 성능 최적화</h4>
+                    <p class="text-xs text-gray-300">프로그램을 더 빠르고 효율적으로 만드는 것</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">🎨 UI/UX</h4>
+                    <p class="text-xs text-gray-300">사용자 인터페이스 / 사용자 경험</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg">
+                    <h4 class="font-bold text-sm mb-1">🚀 애자일/스프린트</h4>
+                    <p class="text-xs text-gray-300">빠른 주기로 개발하는 방법론</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Conclusion -->
+        <section class="slide" data-slide-id="10">
+            <i class="fas fa-graduation-cap fa-3x" style="color: var(--accent-green); margin-bottom: 1.5rem;"></i>
+            <h2>이제 개발자와 대화할 준비 완료!</h2>
+            <div class="text-left max-w-2xl">
+                <h3 class="text-lg font-bold mb-4 text-blue-400">기억해야 할 핵심 용어:</h3>
+                <div class="space-y-2 text-sm">
+                    <p>• <strong>프론트엔드</strong> vs <strong>백엔드</strong>: 보이는 부분 vs 보이지 않는 부분</p>
+                    <p>• <strong>API</strong>: 프로그램 간 소통 방법</p>
+                    <p>• <strong>버그</strong>: 프로그램 오류</p>
+                    <p>• <strong>배포</strong>: 완성품을 사용자에게 제공</p>
+                    <p>• <strong>데이터베이스</strong>: 정보 저장소</p>
+                </div>
+            </div>
+            <p class="mt-8 text-sm text-gray-400">이제 개발 회의에서 "그게 프론트 이슈인가요, 백엔드 이슈인가요?"<br>라고 물어볼 수 있습니다! 🎉</p>
         </section>
     </div>
 
@@ -411,140 +323,8 @@ pip install pandas
     <!-- Progress Bar -->
     <div class="progress-bar"></div>
 
-    <script>
-        // 가이드라인 Rule: 예측 가능성 - 프레젠테이션 상태와 동작을 클래스로 캡슐화
-        class PresentationController {
-            constructor(selector) {
-                this.container = document.querySelector(selector);
-                if (!this.container) return;
-
-                this.slides = Array.from(this.container.children);
-                this.currentSlideIndex = 0;
-                this.activeTimers = []; // 슬라이드별 애니메이션 타이머 관리
-
-                this.prevBtn = document.getElementById('prev-btn');
-                this.nextBtn = document.getElementById('next-btn');
-                this.progressBar = document.querySelector('.progress-bar');
-                
-                this.init();
-            }
-
-            init() {
-                this.updateSlideVisibility();
-                this.updateProgressBar();
-                this.updateNavButtons();
-
-                // 이벤트 리스너 바인딩
-                this.prevBtn.addEventListener('click', () => this.prev());
-                this.nextBtn.addEventListener('click', () => this.next());
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowRight') this.next();
-                    if (e.key === 'ArrowLeft') this.prev();
-                });
-            }
-
-            goTo(index) {
-                if (index < 0 || index >= this.slides.length || index === this.currentSlideIndex) return;
-
-                this.clearAnimations(); // 이전 슬라이드 애니메이션 정리
-                this.currentSlideIndex = index;
-                this.updateSlideVisibility();
-                this.updateProgressBar();
-                this.updateNavButtons();
-                this.runSlideSpecificAnimations(this.slides[index].dataset.slideId);
-            }
-
-            next() {
-                this.goTo(this.currentSlideIndex + 1);
-            }
-
-            prev() {
-                this.goTo(this.currentSlideIndex - 1);
-            }
-
-            updateSlideVisibility() {
-                this.slides.forEach((slide, index) => {
-                    slide.classList.toggle('active', index === this.currentSlideIndex);
-                });
-            }
-
-            updateProgressBar() {
-                const progress = ((this.currentSlideIndex + 1) / this.slides.length) * 100;
-                this.progressBar.style.width = `${progress}%`;
-            }
-
-            updateNavButtons() {
-                this.prevBtn.style.display = this.currentSlideIndex === 0 ? 'none' : 'block';
-                this.nextBtn.style.display = this.currentSlideIndex === this.slides.length - 1 ? 'none' : 'block';
-            }
-
-            // 모든 타이머(setTimeout, setInterval)를 정리하여 슬라이드 간섭 방지
-            clearAnimations() {
-                this.activeTimers.forEach(timerId => clearTimeout(timerId));
-                this.activeTimers = [];
-                // 동적으로 추가된 요소 정리 (예: 아키텍처 다이어그램 화살표)
-                const dynamicElements = document.querySelectorAll('.dynamic-element');
-                dynamicElements.forEach(el => el.remove());
-            }
-
-            // 현재 슬라이드에 필요한 애니메이션 실행
-            runSlideSpecificAnimations(slideId) {
-                if (slideId === '4') {
-                    this.createArchitectureAnimation();
-                }
-            }
-            
-            // 가이드라인 Rule: 응집도 - 개념 시각화 로직의 높은 응집도 유지
-            createArchitectureAnimation() {
-                const diagram = document.getElementById('architecture-diagram');
-                if (!diagram) return;
-
-                const client = document.getElementById('arch-client');
-                const server = document.getElementById('arch-server');
-                const db = document.getElementById('arch-db');
-                
-                const createArrow = (from, to, id, text, topOffset = 0) => {
-                    const arrow = document.createElement('div');
-                    arrow.id = id;
-                    arrow.className = 'arch-arrow dynamic-element';
-                    
-                    const fromRect = from.getBoundingClientRect();
-                    const toRect = to.getBoundingClientRect();
-                    const diagramRect = diagram.getBoundingClientRect();
-
-                    const startX = fromRect.right - diagramRect.left;
-                    const endX = toRect.left - diagramRect.left;
-
-                    arrow.style.left = `${startX + 20}px`;
-                    arrow.style.top = `${fromRect.height / 2 + topOffset}px`;
-                    arrow.style.width = `${endX - startX - 40}px`;
-                    
-                    arrow.innerHTML = `<i class="fas fa-long-arrow-alt-right"></i> <span class="text-sm">${text}</span>`;
-                    diagram.appendChild(arrow);
-                    return arrow;
-                };
-
-                const arrow1 = createArrow(client, server, 'arrow1', '요청(Request)');
-                const arrow2 = createArrow(server, client, 'arrow2', '응답(Response)', 30);
-                arrow2.innerHTML = `<i class="fas fa-long-arrow-alt-left"></i> <span class="text-sm">응답(Response)</span>`;
-                arrow2.style.textAlign = 'right';
-
-                const arrow3 = createArrow(server, db, 'arrow3', '데이터 Read/Write');
-
-                // 애니메이션 순차 실행
-                const timer1 = setTimeout(() => { arrow1.style.opacity = 1; }, 500);
-                const timer2 = setTimeout(() => { arrow3.style.opacity = 1; }, 1000);
-                const timer3 = setTimeout(() => { arrow2.style.opacity = 1; }, 1500);
-
-                this.activeTimers.push(timer1, timer2, timer3);
-            }
-        }
-
-        // DOM이 로드된 후 프레젠테이션 컨트롤러 실행
-        document.addEventListener('DOMContentLoaded', () => {
-            new PresentationController('#presentation-container');
-        });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="assets/js/script.js"></script>
 
 </body>
 </html>
