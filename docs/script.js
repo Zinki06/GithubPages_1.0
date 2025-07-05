@@ -26,6 +26,15 @@ const projects = [
         tags: ["HTML", "CSS", "JavaScript"],
         url: "./project3/",
         status: "진행중"
+    },
+    {
+        id: "project4",
+        title: "JavaScript 중간점검",
+        description: "JavaScript 핵심 개념을 테스트하는 인터랙티브 코딩 테스트 애플리케이션입니다. 실시간 코드 실행 및 테스트 케이스 검증을 포함합니다.",
+        thumbnail: "assets/thumbnails/project4-thumbnail.jpg",
+        tags: ["JavaScript", "코딩테스트", "교육"],
+        url: "./project4/",
+        status: "완료"
     }
 ];
 
