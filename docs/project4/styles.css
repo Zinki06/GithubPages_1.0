@@ -607,6 +607,93 @@ html, body {
     color: var(--warning-color);
 }
 
+/* 자동 저장 표시기 */
+.save-indicator {
+    display: none;
+    font-size: 0.8em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.save-indicator.saving {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: var(--warning-color);
+    border: 1px solid var(--warning-color);
+}
+
+.save-indicator.success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+/* 예상 반환값 표시 영역 */
+.expected-return {
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.expected-return-header {
+    background-color: rgba(0, 122, 204, 0.1);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.expected-return-title {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.expected-return-content {
+    padding: 16px;
+}
+
+.return-example {
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 6px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.return-example:last-child {
+    margin-bottom: 0;
+}
+
+.return-example .example-label {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.return-example .example-value {
+    font-family: 'Fira Code', monospace;
+    color: var(--accent-color);
+    background-color: var(--sidebar-bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.return-example .example-input,
+.return-example .example-output {
+    margin: 4px 0;
+    font-size: 0.9em;
+}
+
+.return-example .example-input {
+    color: var(--text-color);
+}
+
+.return-example .example-output {
+    color: var(--text-color);
+}
+
 .question-options {
     display: flex;
     flex-direction: column;

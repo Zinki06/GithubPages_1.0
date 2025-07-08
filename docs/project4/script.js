@@ -6,7 +6,7 @@ class JavaScriptMidtermTest {
                 category: 'Number 타입 (4차시)',
                 title: '진법 변환기',
                 text: '주어진 10진수를 2진수, 8진수, 16진수로 변환하는 함수를 작성하세요.',
-                description: '10진수 숫자를 받아서 각 진법으로 변환한 결과를 객체로 반환하세요.',
+                description: '조건: 입력은 0 이상 1000 이하의 정수입니다. 반환값은 {binary: "문자열", octal: "문자열", hex: "문자열"} 형태의 객체여야 합니다. 모든 진법 결과는 문자열로 반환하세요.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 8,
@@ -33,7 +33,7 @@ class JavaScriptMidtermTest {
                 category: 'String 타입 (5차시)',
                 title: '문자열 분석기',
                 text: '문자열을 분석하여 통계 정보를 반환하는 함수를 작성하세요.',
-                description: '문자열의 길이, 공백 개수, 단어 개수, 첫 글자와 마지막 글자를 분석하세요.',
+                description: '조건: 입력은 0~200자 길이의 문자열입니다. 반환값은 {length: 숫자, spaces: 숫자, words: 숫자, first: "문자", last: "문자"} 형태입니다. 단어는 공백으로 구분되며, 연속된 공백은 하나로 취급합니다. 빈 문자열의 경우 first와 last는 빈 문자열입니다.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 10,
@@ -59,7 +59,7 @@ class JavaScriptMidtermTest {
                 category: 'Boolean 타입 (6차시)',
                 title: '값 유효성 검사기',
                 text: '다양한 값들이 유효한지 검사하는 함수를 작성하세요.',
-                description: '값이 존재하고(truthy) 유효한 형태인지 검사하여 결과를 반환하세요.',
+                description: '조건: 입력은 {name, age, email} 속성을 가진 객체입니다. name은 빈 문자열이 아니어야 하고, age는 0보다 큰 숫자여야 하며, email은 "@" 문자를 포함해야 합니다. 반환값은 {valid: boolean, errors: [문자열배열]} 형태입니다.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 12,
@@ -88,7 +88,7 @@ class JavaScriptMidtermTest {
                 category: '함수와 스코프 (8차시)',
                 title: '카운터 생성기',
                 text: '독립적인 카운터를 생성하는 함수를 작성하세요.',
-                description: '클로저를 활용하여 각각 독립적인 카운터를 만드는 팩토리 함수를 구현하세요.',
+                description: '조건: initialValue는 -1000~1000 범위의 정수 (기본값 0). 반환값은 {increment: 함수, decrement: 함수, getValue: 함수, reset: 함수} 형태의 객체. 각 메소드는 카운터 조작을 위한 기능을 제공합니다.',
                 type: 'coding',
                 difficulty: '중상',
                 timeLimit: 15,
@@ -131,6 +131,8 @@ class JavaScriptMidtermTest {
                 hints: [
                     '클로저를 사용하여 private 변수를 만드세요',
                     '객체를 반환하여 여러 메소드를 제공하세요',
+                    'increment()는 값을 1 증가, decrement()는 1 감소시킵니다',
+                    'getValue()는 현재 값 반환, reset()은 초기값으로 복원합니다',
                     '기본값 매개변수를 활용하세요'
                 ]
             },
@@ -139,7 +141,7 @@ class JavaScriptMidtermTest {
                 category: '제어 구문 (9차시)',
                 title: '패턴 출력기',
                 text: '주어진 크기에 따라 별 패턴을 출력하는 함수를 작성하세요.',
-                description: '정수 n을 받아서 n단계의 피라미드 패턴을 문자열로 반환하세요.',
+                description: '조건: n은 1~10 사이의 정수. 반환값은 피라미드 형태의 문자열 (\\n으로 줄 구분). 각 줄은 공백과 별(*)로 구성되며, 위에서 아래로 갈수록 별의 개수가 증가합니다. 마지막 줄 뒤에는 \\n이 없습니다.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 12,
@@ -156,8 +158,9 @@ class JavaScriptMidtermTest {
                 ],
                 hints: [
                     '중첩 반복문을 사용하세요',
-                    '공백과 별의 개수 패턴을 파악하세요',
-                    'repeat() 메소드를 활용할 수 있습니다'
+                    '각 줄은 (n-i)개의 공백 + (2*i-1)개의 별로 구성됩니다',
+                    'repeat() 메소드를 활용할 수 있습니다',
+                    'i는 1부터 n까지 반복합니다'
                 ]
             },
             {
@@ -165,7 +168,7 @@ class JavaScriptMidtermTest {
                 category: '객체와 프로토타입 (10차시)',
                 title: '학생 성적 관리',
                 text: '학생 객체를 생성하고 성적을 관리하는 생성자 함수를 작성하세요.',
-                description: 'Student 생성자 함수와 프로토타입 메소드들을 구현하세요.',
+                description: '조건: name은 빈 문자열이 아닌 문자열. score는 0~100 사이의 숫자. Student 생성자는 name과 빈 scores 배열을 초기화. addScore()는 점수 추가, getAverage()는 평균 반환 (소수점 가능), getGrade()는 평균에 따른 등급 반환.',
                 type: 'coding',
                 difficulty: '중상',
                 timeLimit: 18,
@@ -217,7 +220,8 @@ Student.prototype.getGrade = function() {
                 hints: [
                     '생성자 함수에서 this로 속성을 초기화하세요',
                     '프로토타입에 메소드를 정의하세요',
-                    '배열의 push(), reduce() 메소드를 활용하세요'
+                    '배열의 push(), reduce() 메소드를 활용하세요',
+                    '등급 기준: 90+ A, 80+ B, 70+ C, 60+ D, 나머지 F'
                 ]
             },
             {
@@ -225,7 +229,7 @@ Student.prototype.getGrade = function() {
                 category: '배열 조작 (11차시)',
                 title: '중복 제거 함수',
                 text: '배열에서 중복된 요소를 제거하는 함수를 작성하세요.',
-                description: '배열 메소드만을 사용하여 중복을 제거하고 순서를 유지한 새 배열을 반환하세요.',
+                description: '조건: 입력은 최대 길이 1000의 배열 (숫자, 문자열, boolean만 포함). 반환값은 중복이 제거된 새 배열 (첫 번째 등장 순서 유지). 빈 배열 입력 시 빈 배열 반환. 원본 배열은 변경하지 않습니다.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 10,
@@ -242,6 +246,7 @@ Student.prototype.getGrade = function() {
                     { input: [[1, 2, 3]], expected: [1, 2, 3] }
                 ],
                 hints: [
+                    'Set 사용은 금지입니다',
                     'filter() 메소드와 indexOf() 메소드를 조합하세요',
                     '첫 번째 등장 위치와 현재 위치를 비교하세요',
                     'includes() 메소드와 새 배열을 만들어가는 방법도 있습니다'
@@ -252,7 +257,7 @@ Student.prototype.getGrade = function() {
                 category: '고차 함수 (11차시)',
                 title: '데이터 변환 파이프라인',
                 text: '배열 데이터를 변환하는 파이프라인 함수를 작성하세요.',
-                description: '숫자 배열에서 짝수만 필터링하고, 제곱한 후, 합계를 구하는 함수를 구현하세요.',
+                description: '조건: 입력은 최대 길이 100의 숫자 배열 (-1000~1000 범위). 배열을 변환하여 최종적으로 하나의 숫자를 반환합니다. 짝수가 없거나 빈 배열인 경우 0 반환.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 10,
@@ -271,6 +276,7 @@ Student.prototype.getGrade = function() {
                     { input: [[10, 15, 20]], expected: 500 } // 10²+20² = 100+400 = 500
                 ],
                 hints: [
+                    '처리 순서: 1) 짝수만 필터링 2) 각 숫자를 제곱 3) 모든 값의 합계',
                     'filter(), map(), reduce() 메소드를 순서대로 사용하세요',
                     '메소드 체이닝을 활용하세요',
                     '짝수 판별은 % 2 === 0을 사용하세요'
@@ -281,7 +287,7 @@ Student.prototype.getGrade = function() {
                 category: '참조와 값 (12차시)',
                 title: '객체 얕은 복사',
                 text: '객체를 얕은 복사하는 함수를 작성하세요.',
-                description: '객체의 1단계 속성들을 복사하여 새로운 객체를 반환하세요.',
+                description: '조건: 입력은 plain object (null, undefined, 함수, 클래스 인스턴스 제외). 반환값은 1단계 속성만 복사된 새 객체. 중첩 객체나 배열은 참조가 복사됨 (얕은 복사). 원본 객체의 1단계 속성 변경은 복사본에 영향 없음.',
                 type: 'coding',
                 difficulty: '중상',
                 timeLimit: 12,
@@ -318,9 +324,10 @@ Student.prototype.getGrade = function() {
                     }
                 ],
                 hints: [
+                    'Object.assign이나 spread 연산자(...) 사용은 금지입니다',
                     '새 객체를 만들고 속성을 하나씩 복사하세요',
                     'for...in 반복문이나 Object.keys()를 사용하세요',
-                    '중첩 객체는 참조가 복사됩니다'
+                    '중첩 객체는 참조가 복사됩니다 (얕은 복사의 특징)'
                 ]
             },
             {
@@ -328,7 +335,7 @@ Student.prototype.getGrade = function() {
                 category: '호이스팅과 스코프 (12차시)',
                 title: '스코프 분석기',
                 text: '다양한 변수 선언의 결과를 예측하는 함수를 작성하세요.',
-                description: '주어진 코드의 실행 결과를 분석하여 올바른 출력을 반환하세요.',
+                description: '조건: 주석으로 제시된 코드의 console.log 출력 순서대로 배열 반환. 반환값은 6개 원소의 배열 [첫번째출력, ..., 여섯번째출력]. JavaScript의 변수 선언과 스코프 규칙을 이해해야 합니다.',
                 type: 'coding',
                 difficulty: '중상',
                 timeLimit: 15,
@@ -364,9 +371,10 @@ Student.prototype.getGrade = function() {
                     { input: [], expected: [undefined, 2, 3, 10, 20, 30] }
                 ],
                 hints: [
-                    'var는 호이스팅되지만 초기화는 나중에 됩니다',
-                    'let과 const는 블록 스코프를 가집니다',
-                    '함수 스코프 vs 블록 스코프의 차이를 이해하세요'
+                    'var는 함수 스코프이며 호이스팅되지만 undefined로 초기화됩니다',
+                    'let과 const는 블록 스코프이며 TDZ(Temporal Dead Zone) 적용',
+                    '함수 스코프 vs 블록 스코프의 차이를 이해하세요',
+                    '변수 선언이 실행되기 전까지는 상위 스코프의 값을 참조합니다'
                 ]
             },
             {
@@ -374,7 +382,7 @@ Student.prototype.getGrade = function() {
                 category: 'this 바인딩 (13차시)',
                 title: '메소드 바인딩 도구',
                 text: '객체의 메소드를 다른 컨텍스트에서 실행할 수 있도록 바인딩하는 함수를 작성하세요.',
-                description: '주어진 객체의 메소드를 다른 객체에서 실행할 수 있도록 바인딩하세요.',
+                description: '조건: obj는 methodName 속성을 가진 객체, methodName은 문자열, newContext는 바인딩할 새로운 this 객체. 반환값은 newContext를 this로 바인딩된 함수. 호출 시 원본 메소드가 새로운 컨텍스트에서 실행되어야 함.',
                 type: 'coding',
                 difficulty: '중상',
                 timeLimit: 12,
@@ -414,9 +422,10 @@ Student.prototype.getGrade = function() {
                     }
                 ],
                 hints: [
-                    'bind() 메소드를 사용하세요',
+                    'bind(), call(), apply() 중 하나를 사용하세요',
                     '메소드를 객체에서 추출할 때 this 바인딩이 사라집니다',
-                    'call() 또는 apply() 메소드도 고려해보세요'
+                    'obj[methodName]으로 메소드에 접근할 수 있습니다',
+                    'bind()는 새로운 함수를 반환하고, call/apply는 즉시 실행합니다'
                 ]
             },
             {
@@ -424,7 +433,7 @@ Student.prototype.getGrade = function() {
                 category: '종합 응용',
                 title: '간단한 할 일 관리자',
                 text: '할 일을 관리하는 간단한 시스템을 구현하세요.',
-                description: '할 일 추가, 완료 처리, 필터링 기능을 가진 TodoManager를 구현하세요.',
+                description: '조건: TodoManager 생성자는 빈 todos 배열과 ID 카운터를 초기화. addTodo(text)는 할 일 객체를 추가하고 ID 반환. completeTodo(id)는 해당 ID의 완료 상태를 변경. getTodos(filter)는 필터에 따라 할 일 목록을 반환.',
                 type: 'coding',
                 difficulty: '상',
                 timeLimit: 20,
@@ -468,9 +477,11 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
                     }
                 ],
                 hints: [
-                    '각 할 일은 고유한 ID를 가져야 합니다',
-                    '배열 메소드 filter()를 활용하세요',
-                    '생성자 함수와 프로토타입을 활용하세요'
+                    'TodoManager 생성자: this.todos = [], this.lastId = 0',
+                    'addTodo: {id: 숫자, text: 문자열, completed: false} 형태로 추가',
+                    'completeTodo: 해당 id의 completed를 true로 변경',
+                    'getTodos: "all", "completed", "pending" 필터 지원',
+                    '배열 메소드 filter()를 활용하세요'
                 ]
             }
         ];
@@ -483,6 +494,10 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
         this.questionTimers = [];
         this.currentQuestionTimer = null;
         this.testResults = [];
+        
+        // 자동 저장 관련 속성
+        this.autoSaveTimer = null;
+        this.saveIndicator = null;
         
         this.init();
     }
@@ -505,12 +520,26 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
         document.getElementById('run-code-btn').addEventListener('click', () => this.runCode());
         document.getElementById('hint-btn').addEventListener('click', () => this.showHint());
         document.getElementById('close-hint-btn').addEventListener('click', () => this.closeHint());
+        
+        // 실시간 자동 저장 이벤트 바인딩
+        document.getElementById('code-editor').addEventListener('input', () => this.autoSaveCode());
     }
     
     startTest() {
-        this.startTime = new Date();
-        this.userAnswers = new Array(this.questions.length).fill(null);
-        this.currentQuestionIndex = 0;
+        // 로컬 스토리지에서 진행 상황 복원 시도
+        const savedData = this.loadFromLocalStorage();
+        if (savedData && confirm('이전에 진행하던 테스트가 있습니다. 계속 진행하시겠습니까?')) {
+            this.currentQuestionIndex = savedData.currentQuestionIndex;
+            this.userAnswers = savedData.userAnswers;
+            this.startTime = new Date(savedData.startTime);
+        } else {
+            this.startTime = new Date();
+            this.userAnswers = new Array(this.questions.length).fill(null);
+            this.currentQuestionIndex = 0;
+            // 새로 시작하므로 로컬 스토리지 초기화
+            localStorage.removeItem('javascriptMidtermProgress');
+        }
+        
         this.startTimer();
         this.showQuestion();
         this.showScreen('question');
@@ -558,6 +587,9 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
         // 힌트 패널 숨기기
         document.getElementById('hint-panel').style.display = 'none';
         
+        // 예상 반환값 표시
+        this.showExpectedReturn(question);
+        
         this.updateProgress();
         hljs.highlightAll();
     }
@@ -577,6 +609,12 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
             
             if (remainingTime <= 0) {
                 clearInterval(this.currentQuestionTimer);
+                
+                // 시간 초과 시 현재 코드 자동 저장
+                const code = document.getElementById('code-editor').value;
+                this.userAnswers[this.currentQuestionIndex] = code;
+                this.saveToLocalStorage();
+                
                 // 시간 초과 시 다음 문제로 넘어가거나 제출
                 if (this.currentQuestionIndex < this.questions.length - 1) {
                     this.nextQuestion();
@@ -772,6 +810,110 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
         document.getElementById('hint-panel').style.display = 'none';
     }
     
+    autoSaveCode() {
+        // 기존 타이머 취소
+        if (this.autoSaveTimer) {
+            clearTimeout(this.autoSaveTimer);
+        }
+        
+        // 저장 중 표시
+        this.showSaveIndicator('저장 중...');
+        
+        // 디바운싱: 500ms 후 저장
+        this.autoSaveTimer = setTimeout(() => {
+            const code = document.getElementById('code-editor').value;
+            this.userAnswers[this.currentQuestionIndex] = code;
+            
+            // 로컬 스토리지에 백업
+            this.saveToLocalStorage();
+            
+            // 저장 완료 표시
+            this.showSaveIndicator('저장됨', 'success');
+            
+            // 네비게이션 상태 업데이트
+            this.updateNavigation();
+            
+            // 2초 후 표시 제거
+            setTimeout(() => {
+                this.hideSaveIndicator();
+            }, 2000);
+        }, 500);
+    }
+    
+    saveToLocalStorage() {
+        const saveData = {
+            currentQuestionIndex: this.currentQuestionIndex,
+            userAnswers: this.userAnswers,
+            startTime: this.startTime,
+            timestamp: new Date().toISOString()
+        };
+        
+        localStorage.setItem('javascriptMidtermProgress', JSON.stringify(saveData));
+    }
+    
+    loadFromLocalStorage() {
+        try {
+            const savedData = localStorage.getItem('javascriptMidtermProgress');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                // 24시간 이내 데이터만 복원
+                const savedTime = new Date(data.timestamp);
+                const now = new Date();
+                const timeDiff = now - savedTime;
+                
+                if (timeDiff < 24 * 60 * 60 * 1000) { // 24시간
+                    return data;
+                }
+            }
+        } catch (error) {
+            console.error('로컬 스토리지 로드 실패:', error);
+        }
+        return null;
+    }
+    
+    showSaveIndicator(message, type = 'saving') {
+        if (!this.saveIndicator) {
+            this.saveIndicator = document.createElement('div');
+            this.saveIndicator.className = 'save-indicator';
+            document.querySelector('.editor-actions').appendChild(this.saveIndicator);
+        }
+        
+        this.saveIndicator.textContent = message;
+        this.saveIndicator.className = `save-indicator ${type}`;
+        this.saveIndicator.style.display = 'inline-block';
+    }
+    
+    hideSaveIndicator() {
+        if (this.saveIndicator) {
+            this.saveIndicator.style.display = 'none';
+        }
+    }
+    
+    showExpectedReturn(question) {
+        const expectedReturnPanel = document.getElementById('expected-return');
+        const expectedReturnContent = document.getElementById('expected-return-content');
+        
+        // 커스텀 테스트가 아닌 경우에만 예상 반환값 표시
+        const normalTestCases = question.testCases.filter(tc => tc.input !== 'custom');
+        
+        if (normalTestCases.length > 0) {
+            const examples = normalTestCases.slice(0, 3).map((testCase, index) => {
+                return `
+                    <div class="return-example">
+                        <div class="example-label">예시 ${index + 1}:</div>
+                        <div class="example-input">입력: <span class="example-value">${JSON.stringify(testCase.input)}</span></div>
+                        <div class="example-output">출력: <span class="example-value">${JSON.stringify(testCase.expected)}</span></div>
+                    </div>
+                `;
+            }).join('');
+            
+            expectedReturnContent.innerHTML = examples;
+            expectedReturnPanel.style.display = 'block';
+        } else {
+            expectedReturnPanel.style.display = 'none';
+        }
+    }
+    
     extractFunctionName(code) {
         // 함수 이름 추출 (function 키워드 또는 const/let 함수 선언)
         const functionMatch = code.match(/function\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/);
@@ -839,8 +981,16 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
     }
     
     submitTest() {
+        // 제출 시 현재 코드 저장
+        const code = document.getElementById('code-editor').value;
+        this.userAnswers[this.currentQuestionIndex] = code;
+        
         this.endTime = new Date();
         clearInterval(this.timer);
+        
+        // 테스트 완료 시 로컬 스토리지 정리
+        localStorage.removeItem('javascriptMidtermProgress');
+        
         this.calculateResults();
         this.showResults();
         this.showScreen('result');
