@@ -1,0 +1,8 @@
+{
+    "id": "project5",
+    "title": "JavaScript 중간점검 (응용)",
+    "description": "JavaScript 고급 개념과 실무 패턴을 테스트하는 응용 레벨 코딩 테스트 애플리케이션입니다. 복합 개념 활용과 알고리즘 구현을 포함합니다.",
+    "thumbnail": "gradient-5",
+    "tags": ["JavaScript", "코딩테스트", "교육"],
+    "status": "완료"
+} 

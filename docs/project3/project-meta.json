@@ -1,0 +1,8 @@
+{
+    "id": "project3",
+    "title": "포트폴리오 갤러리",
+    "description": "반응형 이미지 갤러리와 Lightbox 기능을 구현한 포트폴리오 사이트입니다.",
+    "thumbnail": "gradient-3",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "status": "진행중"
+} 
