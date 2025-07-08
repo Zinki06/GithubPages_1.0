@@ -648,13 +648,16 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
                     }
                 }
                 
-                const passed = testCase.customCheck ? 
-                    this.deepEqual(result, testCase.expected) : 
-                    JSON.stringify(result) === JSON.stringify(testCase.expected);
+                let passed;
+                if (testCase.input === 'custom') {
+                    passed = result === true;
+                } else {
+                    passed = this.deepEqual(result, testCase.expected);
+                }
                 
                 results.push({
                     input: testCase.input,
-                    expected: testCase.expected,
+                    expected: testCase.input === 'custom' ? true : testCase.expected,
                     actual: result,
                     passed: passed,
                     error: null
@@ -663,7 +666,7 @@ TodoManager.prototype.getTodos = function(filter = 'all') {
             } catch (error) {
                 results.push({
                     input: testCase.input,
-                    expected: testCase.expected,
+                    expected: testCase.input === 'custom' ? true : testCase.expected,
                     actual: null,
                     passed: false,
                     error: error.message
