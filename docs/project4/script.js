@@ -3,15 +3,235 @@ class JavaScriptMidtermTest {
         this.questions = [
             {
                 id: 1,
-                category: '배열 조작',
+                category: 'Number 타입 (4차시)',
+                title: '진법 변환기',
+                text: '주어진 10진수를 2진수, 8진수, 16진수로 변환하는 함수를 작성하세요.',
+                description: '10진수 숫자를 받아서 각 진법으로 변환한 결과를 객체로 반환하세요.',
+                type: 'coding',
+                difficulty: '중',
+                timeLimit: 8,
+                starterCode: `function convertBase(decimal) {
+    // 여기에 코드를 작성하세요
+    // 반환값: { binary: '1010', octal: '12', hex: 'a' }
+    
+}`,
+                testCases: [
+                    { input: [10], expected: { binary: '1010', octal: '12', hex: 'a' } },
+                    { input: [255], expected: { binary: '11111111', octal: '377', hex: 'ff' } },
+                    { input: [0], expected: { binary: '0', octal: '0', hex: '0' } },
+                    { input: [16], expected: { binary: '10000', octal: '20', hex: '10' } },
+                    { input: [100], expected: { binary: '1100100', octal: '144', hex: '64' } }
+                ],
+                hints: [
+                    'toString() 메소드에 진법을 인수로 전달할 수 있습니다',
+                    'Number.prototype.toString(radix) 활용하세요',
+                    '각 진법별로 toString(2), toString(8), toString(16)을 사용하세요'
+                ]
+            },
+            {
+                id: 2,
+                category: 'String 타입 (5차시)',
+                title: '문자열 분석기',
+                text: '문자열을 분석하여 통계 정보를 반환하는 함수를 작성하세요.',
+                description: '문자열의 길이, 공백 개수, 단어 개수, 첫 글자와 마지막 글자를 분석하세요.',
+                type: 'coding',
+                difficulty: '중',
+                timeLimit: 10,
+                starterCode: `function analyzeString(str) {
+    // 여기에 코드를 작성하세요
+    
+}`,
+                testCases: [
+                    { input: ['Hello World'], expected: { length: 11, spaces: 1, words: 2, first: 'H', last: 'd' } },
+                    { input: ['JavaScript is fun!'], expected: { length: 18, spaces: 2, words: 3, first: 'J', last: '!' } },
+                    { input: [''], expected: { length: 0, spaces: 0, words: 0, first: '', last: '' } },
+                    { input: ['   '], expected: { length: 3, spaces: 3, words: 0, first: ' ', last: ' ' } },
+                    { input: ['A'], expected: { length: 1, spaces: 0, words: 1, first: 'A', last: 'A' } }
+                ],
+                hints: [
+                    'split() 메소드로 단어를 나눌 수 있습니다',
+                    'trim() 메소드로 앞뒤 공백을 제거하세요',
+                    '빈 문자열 처리를 주의하세요'
+                ]
+            },
+            {
+                id: 3,
+                category: 'Boolean 타입 (6차시)',
+                title: '값 유효성 검사기',
+                text: '다양한 값들이 유효한지 검사하는 함수를 작성하세요.',
+                description: '값이 존재하고(truthy) 유효한 형태인지 검사하여 결과를 반환하세요.',
+                type: 'coding',
+                difficulty: '중',
+                timeLimit: 12,
+                starterCode: `function validateValues(obj) {
+    // 여기에 코드를 작성하세요
+    // name: 비어있지 않은 문자열
+    // age: 0보다 큰 숫자
+    // email: '@' 포함한 문자열
+    
+}`,
+                testCases: [
+                    { input: [{ name: 'Kim', age: 25, email: 'kim@test.com' }], expected: { valid: true, errors: [] } },
+                    { input: [{ name: '', age: 0, email: 'invalid' }], expected: { valid: false, errors: ['name', 'age', 'email'] } },
+                    { input: [{ name: 'Lee', age: -5, email: 'lee@test.com' }], expected: { valid: false, errors: ['age'] } },
+                    { input: [{ name: 'Park', age: 30, email: 'park@test.com' }], expected: { valid: true, errors: [] } },
+                    { input: [{ name: 'Choi', age: 20, email: 'choi' }], expected: { valid: false, errors: ['email'] } }
+                ],
+                hints: [
+                    'truthy/falsy 개념을 활용하세요',
+                    'includes() 메소드로 문자 포함 여부를 확인하세요',
+                    '논리 연산자를 활용하세요'
+                ]
+            },
+            {
+                id: 4,
+                category: '함수와 스코프 (8차시)',
+                title: '카운터 생성기',
+                text: '독립적인 카운터를 생성하는 함수를 작성하세요.',
+                description: '클로저를 활용하여 각각 독립적인 카운터를 만드는 팩토리 함수를 구현하세요.',
+                type: 'coding',
+                difficulty: '중상',
+                timeLimit: 15,
+                starterCode: `function createCounter(initialValue = 0) {
+    // 여기에 코드를 작성하세요
+    // 반환: { increment, decrement, getValue, reset }
+    
+}`,
+                testCases: [
+                    {
+                        input: 'custom',
+                        test: `
+                            const counter1 = createCounter(5);
+                            const counter2 = createCounter();
+                            counter1.increment();
+                            counter1.increment();
+                            counter2.increment();
+                            return counter1.getValue() === 7 && counter2.getValue() === 1;
+                        `
+                    },
+                    {
+                        input: 'custom',
+                        test: `
+                            const counter = createCounter(10);
+                            counter.decrement();
+                            counter.decrement();
+                            return counter.getValue() === 8;
+                        `
+                    },
+                    {
+                        input: 'custom',
+                        test: `
+                            const counter = createCounter(5);
+                            counter.increment();
+                            counter.reset();
+                            return counter.getValue() === 5;
+                        `
+                    }
+                ],
+                hints: [
+                    '클로저를 사용하여 private 변수를 만드세요',
+                    '객체를 반환하여 여러 메소드를 제공하세요',
+                    '기본값 매개변수를 활용하세요'
+                ]
+            },
+            {
+                id: 5,
+                category: '제어 구문 (9차시)',
+                title: '패턴 출력기',
+                text: '주어진 크기에 따라 별 패턴을 출력하는 함수를 작성하세요.',
+                description: '정수 n을 받아서 n단계의 피라미드 패턴을 문자열로 반환하세요.',
+                type: 'coding',
+                difficulty: '중',
+                timeLimit: 12,
+                starterCode: `function createPyramid(n) {
+    // 여기에 코드를 작성하세요
+    
+}`,
+                testCases: [
+                    { input: [3], expected: '  *\n ***\n*****' },
+                    { input: [1], expected: '*' },
+                    { input: [4], expected: '   *\n  ***\n *****\n*******' },
+                    { input: [2], expected: ' *\n***' },
+                    { input: [5], expected: '    *\n   ***\n  *****\n *******\n*********' }
+                ],
+                hints: [
+                    '중첩 반복문을 사용하세요',
+                    '공백과 별의 개수 패턴을 파악하세요',
+                    'repeat() 메소드를 활용할 수 있습니다'
+                ]
+            },
+            {
+                id: 6,
+                category: '객체와 프로토타입 (10차시)',
+                title: '학생 성적 관리',
+                text: '학생 객체를 생성하고 성적을 관리하는 생성자 함수를 작성하세요.',
+                description: 'Student 생성자 함수와 프로토타입 메소드들을 구현하세요.',
+                type: 'coding',
+                difficulty: '중상',
+                timeLimit: 18,
+                starterCode: `function Student(name) {
+    // 여기에 코드를 작성하세요
+}
+
+Student.prototype.addScore = function(score) {
+    // 여기에 코드를 작성하세요
+};
+
+Student.prototype.getAverage = function() {
+    // 여기에 코드를 작성하세요
+};
+
+Student.prototype.getGrade = function() {
+    // 여기에 코드를 작성하세요
+    // 90+ : A, 80+ : B, 70+ : C, 60+ : D, 그 외 : F
+};`,
+                testCases: [
+                    {
+                        input: 'custom',
+                        test: `
+                            const student = new Student('김철수');
+                            student.addScore(85);
+                            student.addScore(92);
+                            student.addScore(78);
+                            return student.getAverage() === 85 && student.getGrade() === 'B';
+                        `
+                    },
+                    {
+                        input: 'custom',
+                        test: `
+                            const student = new Student('이영희');
+                            student.addScore(95);
+                            student.addScore(88);
+                            return student.getAverage() === 91.5 && student.getGrade() === 'A';
+                        `
+                    },
+                    {
+                        input: 'custom',
+                        test: `
+                            const student = new Student('박민수');
+                            student.addScore(65);
+                            return student.getGrade() === 'D';
+                        `
+                    }
+                ],
+                hints: [
+                    '생성자 함수에서 this로 속성을 초기화하세요',
+                    '프로토타입에 메소드를 정의하세요',
+                    '배열의 push(), reduce() 메소드를 활용하세요'
+                ]
+            },
+            {
+                id: 7,
+                category: '배열 조작 (11차시)',
                 title: '중복 제거 함수',
                 text: '배열에서 중복된 요소를 제거하는 함수를 작성하세요.',
-                description: '주어진 배열에서 중복된 요소를 제거하고 순서를 유지한 새 배열을 반환하는 함수를 구현하세요.',
+                description: '배열 메소드만을 사용하여 중복을 제거하고 순서를 유지한 새 배열을 반환하세요.',
                 type: 'coding',
                 difficulty: '중',
                 timeLimit: 10,
                 starterCode: `function removeDuplicates(arr) {
     // 여기에 코드를 작성하세요
+    // Set을 사용하지 마세요
     
 }`,
                 testCases: [
@@ -22,370 +242,235 @@ class JavaScriptMidtermTest {
                     { input: [[1, 2, 3]], expected: [1, 2, 3] }
                 ],
                 hints: [
-                    'Set 자료구조를 활용해보세요',
-                    '배열의 indexOf 메소드를 사용할 수도 있습니다',
-                    'filter 메소드와 indexOf를 조합해보세요'
-                ]
-            },
-            {
-                id: 2,
-                category: '문자열 처리',
-                title: '회문 검사',
-                text: '주어진 문자열이 회문(palindrome)인지 확인하는 함수를 작성하세요.',
-                description: '대소문자를 구분하지 않고, 공백과 특수문자는 무시하여 회문 여부를 판단하세요.',
-                type: 'coding',
-                difficulty: '중',
-                timeLimit: 8,
-                starterCode: `function isPalindrome(str) {
-    // 여기에 코드를 작성하세요
-    
-}`,
-                testCases: [
-                    { input: ['racecar'], expected: true },
-                    { input: ['A man a plan a canal Panama'], expected: true },
-                    { input: ['race a car'], expected: false },
-                    { input: ['hello'], expected: false },
-                    { input: ['Madam'], expected: true }
-                ],
-                hints: [
-                    '문자열을 정제(소문자 변환, 특수문자 제거)해보세요',
-                    'split, reverse, join 메소드를 활용해보세요',
-                    '정규표현식 /[^a-zA-Z0-9]/g를 사용할 수 있습니다'
-                ]
-            },
-            {
-                id: 3,
-                category: '객체 조작',
-                title: '객체 깊은 복사',
-                text: '중첩된 객체를 깊은 복사(deep copy)하는 함수를 작성하세요.',
-                description: '객체 내부에 다른 객체나 배열이 있어도 완전히 독립적인 복사본을 만드세요.',
-                type: 'coding',
-                difficulty: '중상',
-                timeLimit: 15,
-                starterCode: `function deepCopy(obj) {
-    // 여기에 코드를 작성하세요
-    
-}`,
-                testCases: [
-                    { 
-                        input: [{ a: 1, b: { c: 2 } }], 
-                        expected: { a: 1, b: { c: 2 } },
-                        customCheck: true 
-                    },
-                    { 
-                        input: [{ arr: [1, 2, { x: 3 }] }], 
-                        expected: { arr: [1, 2, { x: 3 }] },
-                        customCheck: true 
-                    },
-                    { input: [null], expected: null },
-                    { input: [42], expected: 42 },
-                    { input: ['hello'], expected: 'hello' }
-                ],
-                hints: [
-                    'typeof 연산자로 타입을 확인하세요',
-                    '재귀 함수를 사용해보세요',
-                    'Array.isArray()로 배열인지 확인할 수 있습니다'
-                ]
-            },
-            {
-                id: 4,
-                category: '함수형 프로그래밍',
-                title: '함수 조합',
-                text: '여러 함수를 조합하는 compose 함수를 작성하세요.',
-                description: 'compose(f, g, h)(x)가 f(g(h(x)))와 같이 동작하도록 구현하세요.',
-                type: 'coding',
-                difficulty: '중상',
-                timeLimit: 12,
-                starterCode: `function compose(...functions) {
-    // 여기에 코드를 작성하세요
-    
-}`,
-                testCases: [
-                    { 
-                        input: 'custom',
-                        test: `
-                            const add5 = x => x + 5;
-                            const multiply2 = x => x * 2;
-                            const composed = compose(multiply2, add5);
-                            return composed(3) === 16; // (3 + 5) * 2
-                        `
-                    },
-                    { 
-                        input: 'custom',
-                        test: `
-                            const square = x => x * x;
-                            const add1 = x => x + 1;
-                            const composed = compose(square, add1);
-                            return composed(4) === 25; // (4 + 1)^2
-                        `
-                    }
-                ],
-                hints: [
-                    'reduceRight 메소드를 사용해보세요',
-                    '함수를 반환하는 함수를 만들어야 합니다',
-                    '스프레드 연산자(...)를 활용하세요'
-                ]
-            },
-            {
-                id: 5,
-                category: '배열 알고리즘',
-                title: '배열 회전',
-                text: '배열을 오른쪽으로 k번 회전시키는 함수를 작성하세요.',
-                description: '원본 배열을 수정하지 않고 새로운 배열을 반환해야 합니다.',
-                type: 'coding',
-                difficulty: '중',
-                timeLimit: 10,
-                starterCode: `function rotateArray(arr, k) {
-    // 여기에 코드를 작성하세요
-    
-}`,
-                testCases: [
-                    { input: [[1, 2, 3, 4, 5], 2], expected: [4, 5, 1, 2, 3] },
-                    { input: [['a', 'b', 'c'], 1], expected: ['c', 'a', 'b'] },
-                    { input: [[1, 2], 3], expected: [2, 1] },
-                    { input: [[], 5], expected: [] },
-                    { input: [[1, 2, 3], 0], expected: [1, 2, 3] }
-                ],
-                hints: [
-                    'k가 배열 길이보다 클 수 있습니다 (% 연산자 활용)',
-                    'slice 메소드를 두 번 사용해보세요',
-                    'concat이나 스프레드 연산자로 배열을 합칠 수 있습니다'
-                ]
-            },
-            {
-                id: 6,
-                category: '객체 처리',
-                title: '객체 평탄화',
-                text: '중첩된 객체를 평탄화(flatten)하는 함수를 작성하세요.',
-                description: '점 표기법을 사용하여 중첩된 속성을 평탄한 구조로 변환하세요.',
-                type: 'coding',
-                difficulty: '중상',
-                timeLimit: 15,
-                starterCode: `function flattenObject(obj, prefix = '') {
-    // 여기에 코드를 작성하세요
-    
-}`,
-                testCases: [
-                    { 
-                        input: [{ a: 1, b: { c: 2, d: 3 } }], 
-                        expected: { 'a': 1, 'b.c': 2, 'b.d': 3 } 
-                    },
-                    { 
-                        input: [{ user: { name: 'Kim', age: 25, address: { city: 'Seoul' } } }], 
-                        expected: { 'user.name': 'Kim', 'user.age': 25, 'user.address.city': 'Seoul' } 
-                    },
-                    { input: [{ x: 1 }], expected: { 'x': 1 } },
-                    { input: [{}], expected: {} }
-                ],
-                hints: [
-                    '재귀 함수를 사용하세요',
-                    'Object.keys()로 객체의 키를 순회하세요',
-                    'typeof obj[key] === "object"로 중첩 객체를 확인하세요'
-                ]
-            },
-            {
-                id: 7,
-                category: '문자열 알고리즘',
-                title: '문자 빈도 계산',
-                text: '문자열에서 각 문자의 빈도를 계산하는 함수를 작성하세요.',
-                description: '대소문자를 구분하고, 공백은 무시하며, 결과를 빈도 순으로 정렬하세요.',
-                type: 'coding',
-                difficulty: '중',
-                timeLimit: 12,
-                starterCode: `function characterFrequency(str) {
-    // 여기에 코드를 작성하세요
-    // 결과 형태: [['a', 3], ['b', 2], ['c', 1]]
-    
-}`,
-                testCases: [
-                    { input: ['hello'], expected: [['l', 2], ['h', 1], ['e', 1], ['o', 1]] },
-                    { input: ['javascript'], expected: [['a', 2], ['j', 1], ['v', 1], ['s', 1], ['c', 1], ['r', 1], ['i', 1], ['p', 1], ['t', 1]] },
-                    { input: ['aaa'], expected: [['a', 3]] },
-                    { input: [''], expected: [] }
-                ],
-                hints: [
-                    'Object나 Map을 사용하여 빈도를 저장하세요',
-                    'Object.entries()로 객체를 배열로 변환할 수 있습니다',
-                    'sort() 메소드로 빈도 순으로 정렬하세요'
+                    'filter() 메소드와 indexOf() 메소드를 조합하세요',
+                    '첫 번째 등장 위치와 현재 위치를 비교하세요',
+                    'includes() 메소드와 새 배열을 만들어가는 방법도 있습니다'
                 ]
             },
             {
                 id: 8,
-                category: '자료구조',
-                title: '스택 구현',
-                text: '배열을 사용하여 스택(Stack) 자료구조를 구현하세요.',
-                description: 'push, pop, peek, isEmpty, size 메소드를 가진 Stack 클래스를 만드세요.',
+                category: '고차 함수 (11차시)',
+                title: '데이터 변환 파이프라인',
+                text: '배열 데이터를 변환하는 파이프라인 함수를 작성하세요.',
+                description: '숫자 배열에서 짝수만 필터링하고, 제곱한 후, 합계를 구하는 함수를 구현하세요.',
                 type: 'coding',
                 difficulty: '중',
-                timeLimit: 15,
-                starterCode: `class Stack {
-    constructor() {
-        // 여기에 코드를 작성하세요
-    }
+                timeLimit: 10,
+                starterCode: `function processNumbers(numbers) {
+    // 여기에 코드를 작성하세요
+    // 1. 짝수만 필터링
+    // 2. 각 숫자를 제곱
+    // 3. 모든 값의 합계 반환
     
-    push(item) {
-        // 여기에 코드를 작성하세요
-    }
+}`,
+                testCases: [
+                    { input: [[1, 2, 3, 4, 5, 6]], expected: 56 }, // 2²+4²+6² = 4+16+36 = 56
+                    { input: [[1, 3, 5]], expected: 0 },
+                    { input: [[2, 4]], expected: 20 }, // 2²+4² = 4+16 = 20
+                    { input: [[]], expected: 0 },
+                    { input: [[10, 15, 20]], expected: 500 } // 10²+20² = 100+400 = 500
+                ],
+                hints: [
+                    'filter(), map(), reduce() 메소드를 순서대로 사용하세요',
+                    '메소드 체이닝을 활용하세요',
+                    '짝수 판별은 % 2 === 0을 사용하세요'
+                ]
+            },
+            {
+                id: 9,
+                category: '참조와 값 (12차시)',
+                title: '객체 얕은 복사',
+                text: '객체를 얕은 복사하는 함수를 작성하세요.',
+                description: '객체의 1단계 속성들을 복사하여 새로운 객체를 반환하세요.',
+                type: 'coding',
+                difficulty: '중상',
+                timeLimit: 12,
+                starterCode: `function shallowCopy(obj) {
+    // 여기에 코드를 작성하세요
     
-    pop() {
-        // 여기에 코드를 작성하세요
-    }
-    
-    peek() {
-        // 여기에 코드를 작성하세요
-    }
-    
-    isEmpty() {
-        // 여기에 코드를 작성하세요
-    }
-    
-    size() {
-        // 여기에 코드를 작성하세요
-    }
 }`,
                 testCases: [
                     {
                         input: 'custom',
                         test: `
-                            const stack = new Stack();
-                            stack.push(1);
-                            stack.push(2);
-                            return stack.peek() === 2 && stack.size() === 2;
+                            const original = { a: 1, b: 2, c: { d: 3 } };
+                            const copied = shallowCopy(original);
+                            copied.a = 10;
+                            return original.a === 1 && copied.a === 10;
                         `
                     },
                     {
                         input: 'custom',
                         test: `
-                            const stack = new Stack();
-                            stack.push(1);
-                            const popped = stack.pop();
-                            return popped === 1 && stack.isEmpty();
+                            const original = { x: 1, y: 2 };
+                            const copied = shallowCopy(original);
+                            return copied.x === 1 && copied.y === 2 && copied !== original;
                         `
-                    }
-                ],
-                hints: [
-                    '내부적으로 배열을 사용하세요',
-                    'push()는 배열의 끝에 추가, pop()은 배열의 끝에서 제거',
-                    'peek()은 마지막 요소를 제거하지 않고 반환'
-                ]
-            },
-            {
-                id: 9,
-                category: '비동기 처리',
-                title: 'Promise 체이닝',
-                text: '여러 비동기 작업을 순차적으로 실행하는 함수를 작성하세요.',
-                description: '주어진 함수들을 순서대로 실행하고, 각 함수의 결과를 다음 함수에 전달하세요.',
-                type: 'coding',
-                difficulty: '중상',
-                timeLimit: 18,
-                starterCode: `function sequentialExecution(tasks, initialValue) {
-    // 여기에 코드를 작성하세요
-    // tasks: Promise를 반환하는 함수들의 배열
-    // initialValue: 첫 번째 함수에 전달할 초기값
-    
-}`,
-                testCases: [
+                    },
                     {
                         input: 'custom',
                         test: `
-                            const add = (x) => Promise.resolve(x + 1);
-                            const multiply = (x) => Promise.resolve(x * 2);
-                            return sequentialExecution([add, multiply], 5)
-                                .then(result => result === 12); // (5 + 1) * 2
+                            const original = { nested: { value: 5 } };
+                            const copied = shallowCopy(original);
+                            copied.nested.value = 10;
+                            return original.nested.value === 10; // 얕은 복사이므로 참조 공유
                         `
                     }
                 ],
                 hints: [
-                    'reduce 메소드를 Promise와 함께 사용해보세요',
-                    'Promise.resolve()로 초기값을 Promise로 감싸세요',
-                    'then() 메소드를 체이닝하세요'
+                    '새 객체를 만들고 속성을 하나씩 복사하세요',
+                    'for...in 반복문이나 Object.keys()를 사용하세요',
+                    '중첩 객체는 참조가 복사됩니다'
                 ]
             },
             {
                 id: 10,
-                category: '알고리즘',
-                title: '최빈값 찾기',
-                text: '배열에서 가장 자주 나타나는 요소(최빈값)를 찾는 함수를 작성하세요.',
-                description: '동일한 빈도의 요소가 여러 개 있으면 가장 먼저 나타나는 것을 반환하세요.',
+                category: '호이스팅과 스코프 (12차시)',
+                title: '스코프 분석기',
+                text: '다양한 변수 선언의 결과를 예측하는 함수를 작성하세요.',
+                description: '주어진 코드의 실행 결과를 분석하여 올바른 출력을 반환하세요.',
                 type: 'coding',
-                difficulty: '중',
-                timeLimit: 12,
-                starterCode: `function findMode(arr) {
-    // 여기에 코드를 작성하세요
+                difficulty: '중상',
+                timeLimit: 15,
+                starterCode: `function analyzeScopeExample() {
+    // 다음 코드의 실행 결과를 예측하여 배열로 반환하세요
     
+    /* 분석할 코드:
+    var a = 1;
+    let b = 2;
+    const c = 3;
+    
+    function test() {
+        console.log(a); // ?
+        console.log(b); // ?
+        console.log(c); // ?
+        
+        var a = 10;
+        let b = 20;
+        const c = 30;
+        
+        console.log(a); // ?
+        console.log(b); // ?
+        console.log(c); // ?
+    }
+    
+    test();
+    */
+    
+    // 여기에 예측한 출력값들을 배열로 반환하세요
+    return []; // [첫번째출력, 두번째출력, ...]
 }`,
                 testCases: [
-                    { input: [[1, 2, 2, 3, 3, 3]], expected: 3 },
-                    { input: [['a', 'b', 'a', 'c', 'b', 'a']], expected: 'a' },
-                    { input: [[1, 1, 2, 2]], expected: 1 },
-                    { input: [[5]], expected: 5 },
-                    { input: [[]], expected: undefined }
+                    { input: [], expected: [undefined, 2, 3, 10, 20, 30] }
                 ],
                 hints: [
-                    'Map이나 객체로 빈도를 계산하세요',
-                    '최대 빈도와 해당 요소를 추적하세요',
-                    '첫 번째 등장 순서를 고려하세요'
+                    'var는 호이스팅되지만 초기화는 나중에 됩니다',
+                    'let과 const는 블록 스코프를 가집니다',
+                    '함수 스코프 vs 블록 스코프의 차이를 이해하세요'
                 ]
             },
             {
                 id: 11,
-                category: '함수 고급',
-                title: '메모이제이션',
-                text: '함수의 결과를 캐싱하는 메모이제이션을 구현하세요.',
-                description: '주어진 함수를 래핑하여 같은 인자로 호출될 때 캐시된 결과를 반환하도록 하세요.',
+                category: 'this 바인딩 (13차시)',
+                title: '메소드 바인딩 도구',
+                text: '객체의 메소드를 다른 컨텍스트에서 실행할 수 있도록 바인딩하는 함수를 작성하세요.',
+                description: '주어진 객체의 메소드를 다른 객체에서 실행할 수 있도록 바인딩하세요.',
                 type: 'coding',
                 difficulty: '중상',
-                timeLimit: 15,
-                starterCode: `function memoize(fn) {
+                timeLimit: 12,
+                starterCode: `function bindMethod(obj, methodName, newContext) {
     // 여기에 코드를 작성하세요
+    // obj의 methodName을 newContext에 바인딩하여 반환
     
 }`,
                 testCases: [
                     {
                         input: 'custom',
                         test: `
-                            let callCount = 0;
-                            const expensiveFunction = (n) => {
-                                callCount++;
-                                return n * n;
+                            const person1 = {
+                                name: '김철수',
+                                greet: function() {
+                                    return \`안녕하세요, \${this.name}입니다.\`;
+                                }
                             };
-                            const memoized = memoize(expensiveFunction);
-                            memoized(5);
-                            memoized(5);
-                            return callCount === 1; // 두 번째 호출은 캐시 사용
+                            const person2 = { name: '이영희' };
+                            const boundGreet = bindMethod(person1, 'greet', person2);
+                            return boundGreet() === '안녕하세요, 이영희입니다.';
+                        `
+                    },
+                    {
+                        input: 'custom',
+                        test: `
+                            const obj1 = {
+                                value: 10,
+                                getValue: function() {
+                                    return this.value;
+                                }
+                            };
+                            const obj2 = { value: 20 };
+                            const boundGetValue = bindMethod(obj1, 'getValue', obj2);
+                            return boundGetValue() === 20;
                         `
                     }
                 ],
                 hints: [
-                    'Map이나 객체로 캐시를 구현하세요',
-                    '함수를 반환하는 함수를 만드세요',
-                    'JSON.stringify()로 인자를 문자열 키로 변환할 수 있습니다'
+                    'bind() 메소드를 사용하세요',
+                    '메소드를 객체에서 추출할 때 this 바인딩이 사라집니다',
+                    'call() 또는 apply() 메소드도 고려해보세요'
                 ]
             },
             {
                 id: 12,
-                category: '배열 고급',
-                title: '배열 청크',
-                text: '배열을 지정된 크기로 나누는 함수를 작성하세요.',
-                description: '큰 배열을 작은 배열들로 분할하여 2차원 배열로 반환하세요.',
+                category: '종합 응용',
+                title: '간단한 할 일 관리자',
+                text: '할 일을 관리하는 간단한 시스템을 구현하세요.',
+                description: '할 일 추가, 완료 처리, 필터링 기능을 가진 TodoManager를 구현하세요.',
                 type: 'coding',
-                difficulty: '중',
-                timeLimit: 10,
-                starterCode: `function chunkArray(arr, size) {
+                difficulty: '상',
+                timeLimit: 20,
+                starterCode: `function TodoManager() {
     // 여기에 코드를 작성하세요
-    
-}`,
+}
+
+TodoManager.prototype.addTodo = function(text) {
+    // 여기에 코드를 작성하세요
+};
+
+TodoManager.prototype.completeTodo = function(id) {
+    // 여기에 코드를 작성하세요
+};
+
+TodoManager.prototype.getTodos = function(filter = 'all') {
+    // 여기에 코드를 작성하세요
+    // filter: 'all', 'completed', 'pending'
+};`,
                 testCases: [
-                    { input: [[1, 2, 3, 4, 5, 6], 2], expected: [[1, 2], [3, 4], [5, 6]] },
-                    { input: [[1, 2, 3, 4, 5], 3], expected: [[1, 2, 3], [4, 5]] },
-                    { input: [[], 2], expected: [] },
-                    { input: [[1, 2], 5], expected: [[1, 2]] },
-                    { input: [[1, 2, 3, 4], 1], expected: [[1], [2], [3], [4]] }
+                    {
+                        input: 'custom',
+                        test: `
+                            const todos = new TodoManager();
+                            todos.addTodo('JavaScript 공부');
+                            todos.addTodo('운동하기');
+                            todos.completeTodo(1);
+                            const allTodos = todos.getTodos('all');
+                            const completed = todos.getTodos('completed');
+                            return allTodos.length === 2 && completed.length === 1;
+                        `
+                    },
+                    {
+                        input: 'custom',
+                        test: `
+                            const todos = new TodoManager();
+                            todos.addTodo('테스트');
+                            const pending = todos.getTodos('pending');
+                            return pending.length === 1 && pending[0].completed === false;
+                        `
+                    }
                 ],
                 hints: [
-                    'for 루프로 배열을 순회하며 size만큼 잘라내세요',
-                    'slice() 메소드를 사용해보세요',
-                    '결과를 담을 빈 배열을 만들어두세요'
+                    '각 할 일은 고유한 ID를 가져야 합니다',
+                    '배열 메소드 filter()를 활용하세요',
+                    '생성자 함수와 프로토타입을 활용하세요'
                 ]
             }
         ];
