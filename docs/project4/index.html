@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -123,6 +125,7 @@
                         <div id="coding-area" class="coding-area">
                             <div class="code-editor-section">
                                 <div class="editor-header">
+                                    <div id="save-indicator-container"></div>
                                     <span class="editor-title">코드 에디터</span>
                                     <div class="editor-actions">
                                         <button id="run-code-btn" class="run-btn">▶ 실행</button>
@@ -200,6 +203,10 @@
                             <span>다시 시작</span>
                             <span class="btn-icon">🔄</span>
                         </button>
+                        <button id="save-result-btn" class="secondary-btn">
+                            <span>결과 저장</span>
+                            <span class="btn-icon">💾</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -229,6 +236,7 @@
             hljs.highlightAll();
         });
     </script>
+    <script src="NanumGothic-normal.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

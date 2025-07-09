@@ -371,20 +371,26 @@ html, body {
 .editor-header {
     background-color: var(--sidebar-bg);
     padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
+}
+
+#save-indicator-container {
+    justify-self: start;
 }
 
 .editor-title {
     font-weight: 600;
     color: var(--header-color);
+    justify-self: center;
 }
 
 .editor-actions {
     display: flex;
     gap: 10px;
+    justify-self: end;
 }
 
 .run-btn {
@@ -551,60 +557,225 @@ html, body {
 
 /* 힌트 패널 */
 .hint-panel {
-    background-color: var(--card-bg);
-    border: 1px solid var(--warning-color);
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
     border-radius: 8px;
-    margin-top: 20px;
+    margin-top: 15px;
+    padding: 0;
     overflow: hidden;
 }
 
 .hint-header {
-    background-color: rgba(255, 193, 7, 0.1);
-    padding: 12px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--warning-color);
 }
 
 .hint-header span {
     font-weight: 600;
-    color: var(--warning-color);
+    font-size: 16px;
 }
 
 .close-hint-btn {
-    background: none;
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    color: var(--warning-color);
-    font-size: 18px;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
 }
 
 .close-hint-btn:hover {
-    background-color: rgba(255, 193, 7, 0.2);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .hint-content {
-    padding: 16px;
+    padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
-.hint-item {
-    margin-bottom: 12px;
-    padding: 10px;
-    background-color: var(--bg-color);
-    border-radius: 6px;
-    border-left: 3px solid var(--warning-color);
-}
-
-.hint-item:last-child {
+/* 3단계 힌트 시스템 스타일 */
+.hint-level {
+    border-bottom: 1px solid #e9ecef;
     margin-bottom: 0;
 }
 
-.hint-item strong {
-    color: var(--warning-color);
+.hint-level:last-child {
+    border-bottom: none;
+}
+
+.hint-level-header {
+    background: #f1f3f4;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.hint-level-title {
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.hint-level-badge {
+    background: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.hint-level-content {
+    padding: 20px;
+}
+
+.hint-level-content .hint-item {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: #495057;
+    padding-left: 0;
+}
+
+.hint-level-content .hint-item:last-child {
+    margin-bottom: 0;
+}
+
+/* 3단계 코드 힌트 스타일 */
+.hint-level-content pre {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.hint-level-content code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* 다음 힌트 버튼 */
+.hint-actions {
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.next-hint-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.next-hint-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hint-arrow {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.next-hint-btn:hover .hint-arrow {
+    transform: translateX(5px);
+}
+
+/* 힌트 완료 표시 */
+.hint-complete {
+    padding: 20px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.hint-complete-icon {
+    font-size: 18px;
+    animation: checkBounce 0.6s ease-in-out;
+}
+
+@keyframes checkBounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0,0,0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -8px, 0);
+    }
+    70% {
+        transform: translate3d(0, -4px, 0);
+    }
+    90% {
+        transform: translate3d(0, -2px, 0);
+    }
+}
+
+/* 반응형 힌트 패널 */
+@media (max-width: 768px) {
+    .hint-panel {
+        margin-top: 10px;
+    }
+    
+    .hint-header {
+        padding: 12px 15px;
+    }
+    
+    .hint-level-header {
+        padding: 10px 15px;
+    }
+    
+    .hint-level-content {
+        padding: 15px;
+    }
+    
+    .hint-actions {
+        padding: 15px;
+    }
+    
+    .next-hint-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+    
+    .hint-level-content pre {
+        padding: 15px;
+        font-size: 12px;
+    }
 }
 
 /* 자동 저장 표시기 */
@@ -614,7 +785,6 @@ html, body {
     padding: 4px 8px;
     border-radius: 4px;
     font-weight: 600;
-    margin-left: 8px;
 }
 
 .save-indicator.saving {
@@ -1077,19 +1247,75 @@ html, body {
 }
 
 /* Animations */
-@keyframes fadeIn {
+/* 로딩 상태 및 알림 애니메이션 */
+@keyframes slideIn {
     from {
+        transform: translateX(100%);
         opacity: 0;
-        transform: translateY(20px);
     }
     to {
+        transform: translateX(0);
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
-.screen.active {
-    animation: fadeIn 0.5s ease-in-out;
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+#loading-indicator {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* 버튼 호버 효과 개선 */
+.nav-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* 자동 저장 표시 개선 */
+.save-indicator {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.save-indicator.saving {
+    background-color: #3498db;
+    color: white;
+}
+
+.save-indicator.success {
+    background-color: #27ae60;
+    color: white;
 }
 
 /* Scrollbar Styling */
