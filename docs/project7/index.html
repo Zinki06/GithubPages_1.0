@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="enDEAR - 반려동물 추모 서비스 사업 발표 자료">
+    <meta name="keywords" content="enDEAR, 반려동물, 추모, 업사이클링, 펫로스">
+    <meta name="author" content="enDEAR Team">
+    <title>enDEAR 사업 발표 자료</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+</head>
+<body>
+    <main id="presentation-container" role="main">
+        <!-- Slide 1: Title -->
+        <section class="slide active" id="slide-1" role="presentation" aria-labelledby="slide-1-title">
+            <div class="content center-align">
+                <h1 id="slide-1-title">enDEAR</h1>
+                <h2>반려동물과의 이별,<br>아름다운 기억으로 남기다</h2>
+                <div class="logo-placeholder" style="margin-top: 2rem;">
+                    <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="40" fill="var(--point-color)" opacity="0.2"/>
+                        <path d="M35 45c0-8 6-15 15-15s15 7 15 15c0 5-2 9-5 12L50 70L40 57c-3-3-5-7-5-12z" fill="var(--point-color)"/>
+                        <circle cx="50" cy="45" r="5" fill="white"/>
+                    </svg>
+                </div>
+                <p style="margin-top: 1rem; font-size: 1.2rem; opacity: 0.8;">펫 유품 업사이클링 플랫폼</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Hook - Problem Statement -->
+        <section class="slide" id="slide-2" role="presentation" aria-labelledby="slide-2-content">
+            <div class="content center-align text-shadow" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=1600&h=900&fit=crop') center/cover;">
+                <h2 id="slide-2-content" class="large-text">"13년 함께한 골든리트리버 루이.<br>남겨진 목줄과 장난감들,<br>어떻게 해야 할까요?"</h2>
+                <p style="margin-top: 2rem; font-size: 1.5rem;">매년 <strong>230만 마리</strong>의 반려동물이 무지개다리를 건넘니다</p>
+            </div>
+        </section>
+
+        <!-- Slide 3: Market Size & Opportunity -->
+        <section class="slide" id="slide-3" role="presentation" aria-labelledby="slide-3-title">
+            <div class="content">
+                <h2 id="slide-3-title">6조원 반려동물 시장, 비어있는 틈새</h2>
+                <div class="two-columns stats">
+                    <div>
+                        <div class="stat-number" aria-label="1,500만명">1,500만</div>
+                        <p>반려인구 (30% 증가/3년)</p>
+                        <small style="color: var(--point-color); font-weight: 600;">전체 가구의 28.4%</small>
+                    </div>
+                    <div>
+                        <div class="stat-number" aria-label="6조원">6조원</div>
+                        <p>반려동물 시장 규모</p>
+                        <small style="color: var(--point-color); font-weight: 600;">연평균 15% 성장</small>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem; text-align: center;">
+                    <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem; display: inline-block;">
+                        <h3 style="color: var(--point-color); margin-bottom: 1rem;">펫 추모 시장</h3>
+                        <p style="font-size: 2rem; font-weight: bold; color: var(--text-color);">연 1,000억원 규모</p>
+                        <p style="margin-top: 0.5rem;">하지만 <strong>유품 업사이클링은 0%</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: The Problem -->
+        <section class="slide" id="slide-4" role="presentation" aria-labelledby="slide-4-title">
+            <div class="content center-align">
+                <h2 id="slide-4-title">89%가 경험하는 딜레마</h2>
+                <div class="illustration-container">
+                    <svg width="500" height="350" viewBox="0 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg" class="illustration">
+                        <!-- Person silhouette -->
+                        <circle cx="250" cy="100" r="30" fill="var(--text-color)" opacity="0.7"/>
+                        <rect x="220" y="130" width="60" height="100" rx="30" fill="var(--text-color)" opacity="0.7"/>
+                        
+                        <!-- Pet items scattered around -->
+                        <rect x="150" y="250" width="40" height="20" rx="10" fill="var(--point-color)" opacity="0.8"/>
+                        <text x="170" y="265" text-anchor="middle" fill="white" font-size="10" font-weight="bold">목줄</text>
+                        
+                        <circle cx="350" cy="270" r="25" fill="var(--highlight-color)" opacity="0.8"/>
+                        <text x="350" y="275" text-anchor="middle" fill="white" font-size="10" font-weight="bold">장난감</text>
+                        
+                        <rect x="200" y="300" width="30" height="25" rx="5" fill="var(--point-color)" opacity="0.8"/>
+                        <text x="215" y="315" text-anchor="middle" fill="white" font-size="9" font-weight="bold">사료그릇</text>
+                        
+                        <!-- Thought bubbles with dilemma -->
+                        <circle cx="150" cy="150" r="35" fill="white" opacity="0.9" stroke="var(--text-color)" stroke-width="2"/>
+                        <text x="150" y="145" text-anchor="middle" font-size="12" fill="var(--text-color)">버리기엔</text>
+                        <text x="150" y="160" text-anchor="middle" font-size="12" fill="var(--text-color)">너무 아까워</text>
+                        
+                        <circle cx="350" cy="150" r="35" fill="white" opacity="0.9" stroke="var(--text-color)" stroke-width="2"/>
+                        <text x="350" y="145" text-anchor="middle" font-size="12" fill="var(--text-color)">보관하기엔</text>
+                        <text x="350" y="160" text-anchor="middle" font-size="12" fill="var(--text-color)">너무 아파</text>
+                        
+                        <!-- Big question mark -->
+                        <text x="250" y="200" font-size="60" fill="var(--point-color)" opacity="0.5" text-anchor="middle" font-weight="bold">?</text>
+                    </svg>
+                </div>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p style="font-size: 1.8rem; font-weight: 600; color: var(--text-color);">기존 추모 서비스: <span style="color: #ef4444;">평균 50-100만원</span></p>
+                    <p style="margin-top: 1rem; font-size: 1.4rem;">대부분의 반려인들이 접근하기 어려운 가격</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Our Solution -->
+        <section class="slide" id="slide-5" role="presentation" aria-labelledby="slide-5-title">
+            <div class="content">
+                <h2 id="slide-5-title">enDEAR만의 솔루션: 유품 업사이클링</h2>
+                <div class="three-columns">
+                    <div class="feature-box">
+                        <div class="icon-container">
+                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="40" fill="var(--point-color)" opacity="0.2"/>
+                                <path d="M25 55 Q50 35 75 55 Q50 75 25 55" fill="var(--point-color)"/>
+                                <circle cx="35" cy="50" r="4" fill="white"/>
+                                <circle cx="65" cy="50" r="4" fill="white"/>
+                                <path d="M40 60 Q50 65 60 60" stroke="white" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <h3>Smart Upcycling</h3>
+                        <p><strong>목줄 → 키링</strong><br>
+                        <strong>장난감 → 파우치</strong><br>
+                        추억이 작품으로</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="icon-container">
+                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="40" fill="var(--point-color)" opacity="0.2"/>
+                                <rect x="25" y="35" width="50" height="30" rx="8" fill="var(--point-color)"/>
+                                <circle cx="40" cy="50" r="3" fill="white"/>
+                                <circle cx="60" cy="50" r="3" fill="white"/>
+                                <rect x="30" y="70" width="40" height="3" fill="var(--point-color)" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <h3>Transparent Process</h3>
+                        <p><strong>실시간 진행상황</strong><br>
+                        <strong>제작자와 소통</strong><br>
+                        신뢰할 수 있는 과정</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="icon-container">
+                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="40" fill="var(--point-color)" opacity="0.2"/>
+                                <circle cx="35" cy="40" r="10" fill="var(--point-color)"/>
+                                <circle cx="65" cy="40" r="10" fill="var(--point-color)"/>
+                                <circle cx="50" cy="65" r="10" fill="var(--point-color)"/>
+                                <path d="M35 40 L65 40 M42 48 L50 65 M58 48 L50 65" stroke="var(--point-color)" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <h3>Healing Community</h3>
+                        <p><strong>같은 경험자들과</strong><br>
+                        <strong>위로와 공감을</strong><br>
+                        지속적인 심리적 지원</p>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem; text-align: center; background: rgba(132, 204, 155, 0.1); padding: 1.5rem; border-radius: 12px;">
+                    <p style="font-size: 1.6rem; font-weight: 600; color: var(--highlight-color);">
+                        💡 유품 활용률 <strong>0% → 85%</strong> 달성 목표
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Product Lineup -->
+        <section class="slide" id="slide-6" role="presentation" aria-labelledby="slide-6-title">
+            <div class="content">
+                <h2 id="slide-6-title">구체적인 제품 라인업</h2>
+                <div class="two-columns">
+                    <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 12px;">
+                        <h3 style="color: var(--point-color); margin-bottom: 1.5rem;">🔑 키링 라인</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>목줄 → 가죽 키링</strong>
+                            <div style="color: var(--point-color); font-weight: 600;">25,000원</div>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>인식표 → 메탈 키링</strong>
+                            <div style="color: var(--point-color); font-weight: 600;">20,000원</div>
+                        </div>
+                        <div>
+                            <strong>털 → 키링 장식</strong>
+                            <div style="color: var(--point-color); font-weight: 600;">15,000원</div>
+                        </div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 12px;">
+                        <h3 style="color: var(--highlight-color); margin-bottom: 1.5rem;">👝 파우치 라인</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>옷 → 패브릭 파우치</strong>
+                            <div style="color: var(--highlight-color); font-weight: 600;">35,000원</div>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>담요 → 대형 파우치</strong>
+                            <div style="color: var(--highlight-color); font-weight: 600;">45,000원</div>
+                        </div>
+                        <div>
+                            <strong>장난감 → 미니 파우치</strong>
+                            <div style="color: var(--highlight-color); font-weight: 600;">30,000원</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <div style="background: linear-gradient(135deg, var(--point-color), #9333EA); color: white; padding: 1.5rem; border-radius: 12px; display: inline-block;">
+                        <h3>평균 주문 금액: <strong>28,000원</strong></h3>
+                        <p>기존 추모 서비스 대비 <strong>80% 절약</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Business Model -->
+        <section class="slide" id="slide-7" role="presentation" aria-labelledby="slide-7-title">
+            <div class="content">
+                <h2 id="slide-7-title">수익 모델과 단위경제학</h2>
+                <div class="three-columns">
+                    <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <h3 style="color: var(--point-color);">🛠 제작 수수료</h3>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--point-color); margin: 1rem 0;">30%</div>
+                        <p>평균 주문당<br><strong>8,400원</strong></p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <h3 style="color: var(--highlight-color);">📦 배송/포장</h3>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--highlight-color); margin: 1rem 0;">5,000원</div>
+                        <p>주문당<br><strong>고정 수익</strong></p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <h3 style="color: var(--point-color);">👥 커뮤니티</h3>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--point-color); margin: 1rem 0;">프리미엄</div>
+                        <p>월 9,900원<br><strong>구독 서비스</strong></p>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem; background: rgba(30, 41, 59, 0.05); padding: 2rem; border-radius: 12px;">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">📊 연간 수익 예측 (2년차)</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <p><strong>월 주문량:</strong> 500건</p>
+                            <p><strong>주문당 수익:</strong> 13,400원</p>
+                            <p><strong>월 매출:</strong> 670만원</p>
+                        </div>
+                        <div>
+                            <p><strong>구독 회원:</strong> 1,200명</p>
+                            <p><strong>구독 수익:</strong> 월 1,188만원</p>
+                            <p style="color: var(--point-color); font-weight: bold; font-size: 1.2rem;"><strong>연간 총매출: 2.2억원</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Platform Features -->
+        <section class="slide" id="slide-8" role="presentation" aria-labelledby="slide-8-title">
+            <div class="content">
+                <h2 id="slide-8-title">차별화된 플랫폼 경험</h2>
+                <div class="ui-mockup-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="ui-mockup" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 2rem; border-radius: 12px;">
+                        <h3 style="color: var(--point-color); margin-bottom: 1rem;">📱 실시간 진행 추적</h3>
+                        <div style="background: white; border-radius: 8px; padding: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                <span style="font-weight: 600;">ORDER-2024-003</span>
+                                <span style="background: var(--highlight-color); color: white; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.8rem;">제작 중</span>
+                            </div>
+                            <div style="height: 120px; background: #f1f5f9; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-color);">
+                                <div>
+                                    <div>✅ 유품 수령 완료</div>
+                                    <div style="margin: 0.5rem 0;">🔄 디자인 진행 중</div>
+                                    <div style="opacity: 0.5;">⏳ 제작 대기</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 2rem; border-radius: 12px;">
+                        <h3 style="color: var(--highlight-color); margin-bottom: 1rem;">💬 제작자 소통</h3>
+                        <div style="background: white; border-radius: 8px; padding: 1.5rem;">
+                            <div style="margin-bottom: 1rem; font-weight: 600;">김지은 작가님</div>
+                            <div style="height: 120px; background: #f1f5f9; border-radius: 6px; padding: 1rem; font-size: 0.9rem;">
+                                <div style="background: var(--point-color); color: white; padding: 0.5rem; border-radius: 6px; margin-bottom: 0.5rem; display: inline-block;">
+                                    "루이의 목줄을 키링으로 만들어드릴게요. 어떤 모양을 원하시나요?"
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="background: var(--highlight-color); color: white; padding: 0.5rem; border-radius: 6px; display: inline-block;">
+                                        "하트 모양으로 부탁드려요 ❤️"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p class="highlight-green" style="font-size: 1.6rem;">🎯 고객 만족도 <strong>4.8/5.0</strong> (베타 테스트 결과)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Competitive Advantage -->
+        <section class="slide" id="slide-9" role="presentation" aria-labelledby="slide-9-title">
+            <div class="content">
+                <h2 id="slide-9-title">명확한 경쟁 우위</h2>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center;">
+                    <div class="matrix-container" style="width: 100%; height: 350px;">
+                        <div class="matrix-y-axis">유품활용<br>▲<br>유골처리</div>
+                        <div class="matrix-grid">
+                            <div class="quadrant top-left">
+                                <div style="position: absolute; top: 60%; left: 20%; background: rgba(132, 204, 155, 0.8); color: white; padding: 0.5rem; border-radius: 6px; font-size: 0.8rem;">
+                                    블루오션
+                                </div>
+                            </div>
+                            <div class="quadrant top-right">
+                                <span class="brand-dot" style="font-size: 0.9rem; font-weight: bold;">enDEAR</span>
+                            </div>
+                            <div class="quadrant bottom-left">
+                                <span class="competitor-dot" style="font-size: 0.8rem;">21그램</span>
+                            </div>
+                            <div class="quadrant bottom-right">
+                                <span style="position: absolute; bottom: 30%; right: 20%; background: #64748b; color: white; padding: 0.6rem; border-radius: 6px; font-size: 0.8rem;">기존업체들</span>
+                            </div>
+                        </div>
+                        <div class="matrix-x-axis">합리적 가격 ► 프리미엄</div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--point-color); margin-bottom: 2rem;">🏆 핵심 차별화 포인트</h3>
+                        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem;">
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--highlight-color); margin-bottom: 0.5rem;">💰 가격 경쟁력</h4>
+                                <p>기존 50-100만원 → <strong>2-5만원</strong> (80% 절약)</p>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--highlight-color); margin-bottom: 0.5rem;">♻️ 유품 활용</h4>
+                                <p>업계 최초 <strong>유품 업사이클링</strong> 서비스</p>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--highlight-color); margin-bottom: 0.5rem;">🔄 지속적 관계</h4>
+                                <p>일회성이 아닌 <strong>커뮤니티 기반</strong> 지원</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--highlight-color); margin-bottom: 0.5rem;">🎯 타겟 확장</h4>
+                                <p>기존 1% → <strong>30% 접근 가능</strong> 시장</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Technology Stack -->
+        <section class="slide" id="slide-10" role="presentation" aria-labelledby="slide-10-title">
+            <div class="content">
+                <h2 id="slide-10-title">검증된 기술 스택</h2>
+                <div class="three-columns tech-stack">
+                    <div>
+                        <div class="tech-icon">
+                            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="20" width="60" height="60" rx="10" fill="#02569B"/>
+                                <path d="M35 40 L50 25 L65 40 L50 55 Z" fill="white"/>
+                                <text x="50" y="90" text-anchor="middle" font-size="8" fill="#02569B">Flutter</text>
+                            </svg>
+                        </div>
+                        <h3>Flutter 크로스플랫폼</h3>
+                        <p><strong>iOS/Android 동시 출시</strong><br>
+                        개발 기간 50% 단축<br>
+                        유지보수 비용 절감</p>
+                    </div>
+                    <div>
+                        <div class="tech-icon">
+                            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="20" width="60" height="60" rx="10" fill="#3ECF8E"/>
+                                <circle cx="50" cy="50" r="15" fill="white"/>
+                                <text x="50" y="90" text-anchor="middle" font-size="8" fill="#3ECF8E">Supabase</text>
+                            </svg>
+                        </div>
+                        <h3>Supabase 백엔드</h3>
+                        <p><strong>실시간 데이터 동기화</strong><br>
+                        PostgreSQL 기반 확장성<br>
+                        인증/보안 자동 처리</p>
+                    </div>
+                    <div>
+                        <div class="tech-icon">
+                            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="30" fill="#4285F4"/>
+                                <path d="M35 45 Q50 35 65 45 Q50 65 35 45" fill="white"/>
+                                <text x="50" y="90" text-anchor="middle" font-size="8" fill="#4285F4">Gemini API</text>
+                            </svg>
+                        </div>
+                        <h3>AI 기반 모더레이션</h3>
+                        <p><strong>커뮤니티 자동 관리</strong><br>
+                        부적절 콘텐츠 필터링<br>
+                        감정 분석 기반 추천</p>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem; background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem;">
+                    <h3 style="text-align: center; margin-bottom: 2rem; color: var(--point-color);">🚀 개발 로드맵</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; text-align: center;">
+                        <div>
+                            <h4 style="color: var(--highlight-color);">Phase 1 (2개월)</h4>
+                            <p>MVP 앱 출시<br>베타 테스트</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--highlight-color);">Phase 2 (4개월)</h4>
+                            <p>웹 플랫폼 출시<br>제작자 네트워크 확장</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--highlight-color);">Phase 3 (6개월)</h4>
+                            <p>AI 추천 시스템<br>글로벌 진출</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Market Strategy -->
+        <section class="slide" id="slide-11" role="presentation" aria-labelledby="slide-11-title">
+            <div class="content">
+                <h2 id="slide-11-title">시장 진입 전략</h2>
+                <div class="two-columns">
+                    <div>
+                        <h3 style="color: var(--point-color); margin-bottom: 2rem;">🎯 타겟 고객</h3>
+                        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem;">
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--highlight-color);">1차: 수도권 반려인</h4>
+                                <p>• 20-40대 여성 (68%)<br>
+                                • 월소득 300만원 이상<br>
+                                • SNS 활용 고객</p>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--highlight-color);">2차: 전국 확산</h4>
+                                <p>• 펜션/카페 제휴<br>
+                                • 동물병원 연계<br>
+                                • 온라인 커뮤니티</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--highlight-color);">3차: 해외 진출</h4>
+                                <p>• 일본/대만 시장<br>
+                                • 현지 제작자 네트워크<br>
+                                • B2B 파트너십</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--point-color); margin-bottom: 2rem;">📈 성장 계획</h3>
+                        <div class="chart-container">
+                            <svg width="400" height="250" viewBox="0 0 400 250" class="chart">
+                                <rect width="400" height="250" fill="white" rx="8"/>
+                                
+                                <!-- Grid -->
+                                <defs>
+                                    <pattern id="grid2" width="40" height="25" patternUnits="userSpaceOnUse">
+                                        <path d="M 40 0 L 0 0 0 25" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="400" height="250" fill="url(#grid2)" />
+                                
+                                <!-- Growth curves -->
+                                <path d="M40 200 Q120 180 200 140 Q280 100 360 60" stroke="var(--point-color)" stroke-width="3" fill="none"/>
+                                <path d="M40 220 Q120 200 200 170 Q280 140 360 100" stroke="var(--highlight-color)" stroke-width="3" fill="none"/>
+                                
+                                <!-- Data points -->
+                                <circle cx="120" cy="180" r="4" fill="var(--point-color)"/>
+                                <circle cx="200" cy="140" r="4" fill="var(--point-color)"/>
+                                <circle cx="280" cy="100" r="4" fill="var(--point-color)"/>
+                                
+                                <!-- Labels -->
+                                <text x="120" y="235" text-anchor="middle" font-size="10" fill="var(--text-color)">6개월</text>
+                                <text x="200" y="235" text-anchor="middle" font-size="10" fill="var(--text-color)">1년</text>
+                                <text x="280" y="235" text-anchor="middle" font-size="10" fill="var(--text-color)">2년</text>
+                                
+                                <!-- Legend -->
+                                <text x="50" y="25" font-size="12" font-weight="600" fill="var(--point-color)">월 주문량</text>
+                                <text x="50" y="45" font-size="12" font-weight="600" fill="var(--highlight-color)">누적 고객</text>
+                            </svg>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 1.5rem; margin-top: 1rem;">
+                            <p style="text-align: center;"><strong>2년차 목표</strong></p>
+                            <p style="color: var(--point-color); font-weight: bold; text-align: center;">월 500건 주문 / 5,000명 누적고객</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: The Team -->
+        <section class="slide" id="slide-12" role="presentation" aria-labelledby="slide-12-title">
+            <div class="content">
+                <h2 id="slide-12-title">검증된 실행력을 가진 팀</h2>
+                <div class="three-columns team-members">
+                    <div>
+                        <div class="profile-pic" style="background: linear-gradient(135deg, var(--point-color), #9333EA); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">📊</div>
+                        <h3>김사업 (CEO)</h3>
+                        <p><strong>기획/마케팅</strong></p>
+                        <div style="text-align: left; margin-top: 1rem; font-size: 0.9rem;">
+                            • 네이버 마케팅 5년<br>
+                            • 펫 커머스 스타트업 운영<br>
+                            • 반려동물 전문가 과정 수료<br>
+                            • <strong>MAU 10만 앱 런칭 경험</strong>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="profile-pic" style="background: linear-gradient(135deg, var(--highlight-color), #059669); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">🎨</div>
+                        <h3>이디자인 (CDO)</h3>
+                        <p><strong>UX/UI 디자인</strong></p>
+                        <div style="text-align: left; margin-top: 1rem; font-size: 0.9rem;">
+                            • 삼성전자 UX팀 4년<br>
+                            • 카카오 프로덕트 디자인<br>
+                            • UXUI 어워드 3회 수상<br>
+                            • <strong>MAU 50만+ 앱 디자인</strong>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="profile-pic" style="background: linear-gradient(135deg, #6366f1, #3730a3); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">⚡</div>
+                        <h3>박개발 (CTO)</h3>
+                        <p><strong>AI/풀스택 개발</strong></p>
+                        <div style="text-align: left; margin-top: 1rem; font-size: 0.9rem;">
+                            • 네이버클라우드 AI팀 6년<br>
+                            • Flutter/React 전문<br>
+                            • AI 모델 개발/배포 경험<br>
+                            • <strong>DAU 100만+ 서비스 구축</strong>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem; background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem; text-align: center;">
+                    <h3 style="color: var(--point-color); margin-bottom: 1rem;">🏅 팀 시너지</h3>
+                    <p style="font-size: 1.2rem;">대기업 경력 + 스타트업 경험 + 펫 도메인 전문성<br>
+                    <strong style="color: var(--highlight-color);">평균 업계 경력 5년, 총 15년의 검증된 실행력</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Financial Projection -->
+        <section class="slide" id="slide-13" role="presentation" aria-labelledby="slide-13-title">
+            <div class="content">
+                <h2 id="slide-13-title">재무 계획 및 투자 활용</h2>
+                <div class="two-columns">
+                    <div>
+                        <h3 style="color: var(--point-color); margin-bottom: 2rem;">💰 3년 재무 전망</h3>
+                        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr style="border-bottom: 2px solid var(--point-color);">
+                                    <th style="text-align: left; padding: 0.5rem; color: var(--point-color);">연도</th>
+                                    <th style="text-align: right; padding: 0.5rem; color: var(--point-color);">매출</th>
+                                    <th style="text-align: right; padding: 0.5rem; color: var(--point-color);">순이익</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.5rem;">1년차</td>
+                                    <td style="text-align: right; padding: 0.5rem;">5천만원</td>
+                                    <td style="text-align: right; padding: 0.5rem; color: #ef4444;">-3천만원</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.5rem;">2년차</td>
+                                    <td style="text-align: right; padding: 0.5rem;">2.2억원</td>
+                                    <td style="text-align: right; padding: 0.5rem; color: var(--highlight-color);">3천만원</td>
+                                </tr>
+                                <tr style="background: rgba(167, 139, 250, 0.1);">
+                                    <td style="padding: 0.5rem; font-weight: bold;">3년차</td>
+                                    <td style="text-align: right; padding: 0.5rem; font-weight: bold;">6.5억원</td>
+                                    <td style="text-align: right; padding: 0.5rem; font-weight: bold; color: var(--highlight-color);">1.8억원</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="margin-top: 1.5rem; text-align: center; background: rgba(132, 204, 155, 0.1); padding: 1rem; border-radius: 8px;">
+                            <p style="color: var(--highlight-color); font-weight: bold;">3년차 밸류에이션: <strong>50억원</strong></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--point-color); margin-bottom: 2rem;">🎯 투자 활용 계획</h3>
+                        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem;">
+                            <h4 style="color: var(--highlight-color); margin-bottom: 1rem;">Series A: 10억원 목표</h4>
+                            <div style="margin-bottom: 1rem;">
+                                <strong>팀 확장 (40%)</strong>
+                                <div style="background: var(--point-color); height: 8px; border-radius: 4px; width: 40%; margin: 0.3rem 0;"></div>
+                                <small>개발자 3명, 디자이너 2명, 마케터 2명</small>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <strong>마케팅 (30%)</strong>
+                                <div style="background: var(--highlight-color); height: 8px; border-radius: 4px; width: 30%; margin: 0.3rem 0;"></div>
+                                <small>인플루언서, 광고, 브랜딩</small>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <strong>기술 개발 (20%)</strong>
+                                <div style="background: var(--point-color); height: 8px; border-radius: 4px; width: 20%; margin: 0.3rem 0;"></div>
+                                <small>AI 기능, 플랫폼 고도화</small>
+                            </div>
+                            <div>
+                                <strong>운영자금 (10%)</strong>
+                                <div style="background: #64748b; height: 8px; border-radius: 4px; width: 10%; margin: 0.3rem 0;"></div>
+                                <small>사무실, 법무, 회계</small>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1.5rem; background: rgba(167, 139, 250, 0.1); padding: 1rem; border-radius: 8px;">
+                            <p style="text-align: center; font-weight: bold;">18개월 내 <span style="color: var(--point-color);">손익분기점</span> 달성</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Vision & Next Steps -->
+        <section class="slide" id="slide-14" role="presentation" aria-labelledby="slide-14-title">
+            <div class="content center-align">
+                <h2 id="slide-14-title">enDEAR가 만들어갈 미래</h2>
+                <div class="vision-icon" style="margin: 2rem 0;">
+                    <svg width="180" height="180" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="75" cy="75" r="60" fill="var(--point-color)" opacity="0.1"/>
+                        <circle cx="75" cy="75" r="40" fill="var(--point-color)" opacity="0.2"/>
+                        <circle cx="75" cy="75" r="20" fill="var(--point-color)"/>
+                        <path d="M65 70 Q75 60 85 70 Q75 90 65 70" fill="white"/>
+                    </svg>
+                </div>
+                <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 3rem; margin: 2rem 0;">
+                    <p class="large-text" style="margin-bottom: 2rem;">"반려동물과의 이별이 더 이상 끝이 아닌,<br><strong style="color: var(--point-color);">새로운 시작</strong>이 되는 세상"</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="color: var(--highlight-color);">🌍 글로벌 확장</h4>
+                            <p>아시아 펫 시장 진출<br>현지화 서비스</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--highlight-color);">🤖 AI 고도화</h4>
+                            <p>맞춤형 추천<br>감정 분석 기반 케어</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--highlight-color);">🏥 헬스케어 연계</h4>
+                            <p>동물병원 제휴<br>종합 펫케어 플랫폼</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: linear-gradient(135deg, var(--point-color), #9333EA); color: white; padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">🚀 Next Steps</h3>
+                    <p><strong>1월:</strong> 시드 투자 유치 완료<br>
+                    <strong>3월:</strong> MVP 앱 출시 및 베타 테스트<br>
+                    <strong>6월:</strong> Series A 투자 및 팀 확장<br>
+                    <strong>12월:</strong> 전국 서비스 및 손익분기점</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Thank You & Contact -->
+        <section class="slide" id="slide-15" role="presentation" aria-labelledby="slide-15-title">
+            <div class="content center-align">
+                <h1 id="slide-15-title" style="margin-bottom: 2rem;">함께 만들어가요,<br>따뜻한 이별의 문화를</h1>
+                <div style="margin: 3rem 0;">
+                    <svg width="150" height="150" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" stroke="var(--point-color)" stroke-width="3" fill="none"/>
+                        <circle cx="50" cy="50" r="35" fill="var(--point-color)" opacity="0.1"/>
+                        <text x="50" y="38" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--point-color)">Q</text>
+                        <text x="50" y="55" text-anchor="middle" font-size="14" fill="var(--point-color)">&amp;</text>
+                        <text x="50" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--point-color)">A</text>
+                    </svg>
+                </div>
+                <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
+                    <h3 style="color: var(--point-color); margin-bottom: 1.5rem;">📞 Contact</h3>
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                        <strong>CEO 김사업</strong><br>
+                        📧 business@endear.co.kr<br>
+                        📱 010-1234-5678
+                    </p>
+                    <p style="font-size: 1rem; color: var(--highlight-color);">
+                        🌐 www.endear.co.kr<br>
+                        📱 App Store / Google Play (3월 출시 예정)
+                    </p>
+                </div>
+                <p style="font-size: 1.4rem; margin-top: 2rem;">질문과 답변을 나눠주세요 💝</p>
+            </div>
+        </section>
+    </main>
+    
+    <nav class="navigation" role="navigation" aria-label="프레젠테이션 네비게이션">
+        <button id="prev-btn" aria-label="이전 슬라이드">◀</button>
+        <span id="slide-counter" aria-live="polite">1 / 15</span>
+        <button id="next-btn" aria-label="다음 슬라이드">▶</button>
+    </nav>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
