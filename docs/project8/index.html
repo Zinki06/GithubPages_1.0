@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인공신경망 학습의 핵심 원리</title>
+    <!-- Guideline: 아이콘을 통한 의미 명료화 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Guideline: 가독성 (Readability) --- */
+        /* 매직 넘버 대신 이름 있는 상수를 사용 */
+        :root {
+            /* Color Palette */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --text-primary: #E0E0E0;
+            --text-secondary: #B0B0B0;
+            --accent-blue: #2979FF;
+            --accent-green: #00E676;
+            --accent-red: #FF5252;
+            --border-color: #333333;
+
+            /* Typography */
+            --font-main: 'Noto Sans KR', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+
+            /* Transitions */
+            --transition-speed: 400ms;
+        }
+
+        /* 기본 스타일링 */
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            overflow: hidden;
+        }
+
+        #presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Guideline: 결합도 (Coupling) --- */
+        /* CSS 전환을 활용한 상태와 표현의 분리 */
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition-speed) ease-in-out,
+                        transform var(--transition-speed) ease-in-out;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .slide-content {
+            width: 80%;
+            max-width: 1000px;
+            text-align: center;
+        }
+        .slide-content.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* 가독성 높은 타이포그래피 시스템 구축 */
+        h1 { font-size: 3.2rem; color: #fff; margin-bottom: 0.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 2rem; border-bottom: 2px solid var(--accent-blue); padding-bottom: 1rem; }
+        h2 > i { margin-right: 1rem; color: var(--accent-blue); }
+        p { font-size: 1.3rem; line-height: 1.8; color: var(--text-secondary); }
+        .subtitle { font-size: 1.5rem; color: var(--text-secondary); }
+
+        ul.term-list { list-style: none; padding: 0; }
+        ul.term-list li { background: var(--bg-card); border-left: 4px solid var(--accent-blue); padding: 1rem; margin-bottom: 0.5rem; text-align: left;}
+
+
+        /* --- Guideline: 응집도 (Cohesion) --- */
+        /* UI 요소를 재사용 가능한 컴포넌트 단위로 설계 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--accent-blue);
+            width: 0%;
+            transition: width calc(var(--transition-speed) / 2) ease-out;
+            z-index: 10;
+        }
+
+        .card {
+            flex: 1;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform var(--transition-speed) ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .highlight {
+            background-color: rgba(41, 121, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+            color: var(--text-primary);
+            margin-top: 2rem;
+        }
+
+        .code-block {
+            display: inline-block;
+            background-color: #282c34;
+            font-family: var(--font-code);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: #abb2bf;
+            text-align: left;
+        }
+
+        /* 개별 슬라이드 특화 스타일 */
+        .flex-row { display: flex; justify-content: space-around; gap: 2rem; margin-top: 2rem; }
+
+        .visualizer {
+            margin-top: 2rem;
+            min-height: 250px;
+            width: 100%;
+        }
+
+        .activation-gallery { display: flex; justify-content: center; gap: 1rem; cursor: pointer; }
+        .act-card { padding: 1rem; border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease; }
+        .act-card.active, .act-card:hover { border-color: var(--accent-blue); background: var(--bg-card); }
+        .act-card h4 { margin: 0 0 0.5rem 0; color: var(--text-primary); }
+        .act-card p { font-size: 0.9rem; margin: 0; line-height: 1.3; }
+
+        .final-flow { display: flex; align-items: center; justify-content: center; gap: 1rem; font-size: 1.2rem; margin-top: 2rem; flex-wrap: wrap; }
+        .final-flow .box { background: var(--bg-card); padding: 1rem; border-radius: 8px; }
+        .final-flow .fa-arrow-right { color: var(--accent-blue); }
+    </style>
+</head>
+<body>
+    <!-- Guideline: UI 요소를 재사용 가능한 컴포넌트 단위로 설계 -->
+    <div class="progress-bar"></div>
+
+    <main id="presentation-container">
+        <!-- Slide 1: Title -->
+        <section class="slide" data-slide-id="0">
+            <div class="slide-content center">
+                <h1>인공신경망 학습의 핵심 원리</h1>
+                <p class="subtitle">데이터로부터 패턴을 배우는 모델의 유기적 학습 과정</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: 학습의 기본 흐름 -->
+        <section class="slide" data-slide-id="1">
+            <div class="slide-content">
+                <h2><i class="fa-solid fa-arrows-spin"></i> 학습의 기본 흐름: 순전파와 역전파</h2>
+                <div class="flex-row">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-circle-play"></i> 순전파 (Feedforward)</h3>
+                        <p>입력 데이터가 신경망을 통과해 <strong>예측값을 만드는 과정</strong>입니다. 각 층은 가중치를 적용하고 활성화 함수를 통과시킵니다.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-circle-rewind"></i> 역전파 (Backpropagation)</h3>
+                        <p>예측과 정답의 <strong>오차(Error)</strong>를 반대 방향으로 전파해 <strong>가중치를 수정</strong>하는, 학습의 핵심 과정입니다.</p>
+                    </div>
+                </div>
+                <!-- Guideline: 동적 콘텐츠 생성을 통한 HTML과 로직의 결합도 최소화 -->
+                <div id="flow-visualizer" class="visualizer"></div>
+            </div>
+        </section>
+
+        <!-- Slide 3: 손실 함수 -->
+        <section class="slide" data-slide-id="2">
+            <div class="slide-content">
+                <h2><i class="fa-solid fa-bullseye"></i> 학습의 방향잡기 ①: 손실 함수 (Loss Function)</h2>
+                <p>모델의 예측이 <strong>얼마나 틀렸는지</strong>를 나타내는 '목표' 지표입니다. 학습의 목표는 이 손실 함수의 값을 최소화하는 것입니다.</p>
+                <div id="loss-visualizer" class="visualizer"></div>
+                <p class="code-block">Loss = f(예측값, 실제 정답)</p>
+            </div>
+        </section>
+
+        <!-- Slide 4: 경사하강법 -->
+        <section class="slide" data-slide-id="3">
+            <div class="slide-content">
+                <h2><i class="fa-solid fa-mountain-sun"></i> 학습의 방향잡기 ②: 경사하강법 (Gradient Descent)</h2>
+                <p>손실 함수를 최소화하기 위한 '방법'입니다. 손실 함수의 가장 가파른 경사를 따라 점진적으로 내려갑니다.</p>
+                <div id="gradient-descent-visualizer" class="visualizer"></div>
+                <p class="code-block">새 가중치 = 기존 가중치 - (학습률 × 경사)</p>
+            </div>
+        </section>
+
+        <!-- Slide 5: 미니배치 -->
+        <section class="slide" data-slide-id="4">
+             <div class="slide-content">
+                <h2><i class="fa-solid fa-cubes"></i> 효율적인 학습 전략: 미니배치 (Mini-Batch)</h2>
+                <p>전체 데이터를 작은 묶음(미니배치)으로 나누어 학습하여, 계산 효율과 안정성을 높입니다.</p>
+                <div id="minibatch-visualizer" class="visualizer"></div>
+                <ul class="term-list">
+                    <li><strong>이터레이션 (Iteration):</strong> 1개의 미니배치를 학습하는 과정</li>
+                    <li><strong>에포크 (Epoch):</strong> 전체 데이터를 모두 사용하는 과정</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 6: 활성화 함수 역할 -->
+        <section class="slide" data-slide-id="5">
+            <div class="slide-content">
+                <h2><i class="fa-solid fa-bolt"></i> 표현력 증대: 활성화 함수 (Activation Function)</h2>
+                <p>신경망이 단순한 선형 관계를 넘어 <strong>복잡한 비선형 패턴</strong>을 학습할 수 있게 하는 핵심 요소입니다.</p>
+                <div id="activation-role-visualizer" class="visualizer"></div>
+                <p class="highlight">활성화 함수가 없다면, 아무리 층을 깊게 쌓아도 결국 하나의 거대한 선형 함수와 같습니다.</p>
+            </div>
+        </section>
+
+        <!-- Slide 7: 주요 활성화 함수 -->
+        <section class="slide" data-slide-id="6">
+            <div class="slide-content">
+                <h2><i class="fa-solid fa-chart-line"></i> 주요 활성화 함수</h2>
+                <p>각 함수는 고유한 장단점을 가지며, 문제에 따라 선택적으로 사용됩니다.</p>
+                <div class="activation-gallery">
+                    <div class="act-card" data-func="Sigmoid">
+                        <h4>Sigmoid</h4>
+                        <p>기울기 소실 문제에 취약함</p>
+                    </div>
+                     <div class="act-card active" data-func="ReLU">
+                        <h4>ReLU</h4>
+                        <p>가장 널리 쓰이며, 빠름.<br>'죽은 ReLU' 문제 발생 가능</p>
+                    </div>
+                     <div class="act-card" data-func="Leaky ReLU">
+                        <h4>Leaky ReLU</h4>
+                        <p>'죽은 ReLU' 문제 해결</p>
+                    </div>
+                </div>
+                 <div id="activation-graph-visualizer" class="visualizer"></div>
+            </div>
+        </section>
+        
+        <!-- Slide 8: 결론 -->
+        <section class="slide" data-slide-id="7">
+             <div class="slide-content center">
+                <h2><i class="fa-solid fa-sitemap"></i> 결론: 유기적인 협력 관계</h2>
+                <p>신경망 학습은 여러 요소들이 정교하게 협력하며 모델을 점진적으로 개선하는 과정입니다.</p>
+                <div class="final-flow">
+                    <span>데이터</span> <i class="fa-solid fa-arrow-right"></i>
+                    <span class="box">미니배치</span> <i class="fa-solid fa-arrow-right"></i>
+                    <span class="box">순전파 & 활성화</span> <i class="fa-solid fa-arrow-right"></i>
+                    <span class="box">손실 계산</span> <i class="fa-solid fa-arrow-right"></i>
+                    <span class="box">경사하강법 & 역전파</span> <i class="fa-solid fa-arrow-right"></i>
+                    <span>가중치 업데이트</span>
+                </div>
+             </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- Guideline: 예측 가능성 (Predictability) ---
+        // 프레젠테이션 상태와 동작을 클래스로 캡슐화
+        class PresentationController {
+            constructor(selector) {
+                this.container = document.querySelector(selector);
+                if (!this.container) {
+                    console.error("Presentation container not found");
+                    return;
+                }
+                
+                this.slides = Array.from(this.container.children);
+                this.progressBar = document.querySelector('.progress-bar');
+                this.currentSlideIndex = 0;
+                this.activeTimers = []; // 실행 중인 타이머 관리
+
+                this.init();
+            }
+
+            init() {
+                this.updateSlideVisibility();
+                this.updateProgressBar();
+                this.runSlideAnimations(this.currentSlideIndex); // 첫 슬라이드 애니메이션 실행
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight') this.next();
+                    if (e.key === 'ArrowLeft') this.prev();
+                });
+            }
+            
+            goTo(index) {
+                if (index < 0 || index >= this.slides.length || index === this.currentSlideIndex) return;
+
+                // 예측 가능성: 이전 슬라이드의 동적 요소를 명확히 정리 (cleanup)
+                this.clearAnimations();
+
+                this.currentSlideIndex = index;
+                this.updateSlideVisibility();
+                this.updateProgressBar();
+
+                // 예측 가능성: 새 슬라이드에 필요한 애니메이션만 실행
+                const timer = setTimeout(() => this.runSlideAnimations(this.currentSlideIndex), 50); // CSS transition 시간 고려
+                this.activeTimers.push(timer);
+            }
+
+            next() { this.goTo(this.currentSlideIndex + 1); }
+            prev() { this.goTo(this.currentSlideIndex - 1); }
+
+            updateProgressBar() {
+                if (!this.progressBar) return;
+                const percentage = (this.currentSlideIndex / (this.slides.length - 1)) * 100;
+                this.progressBar.style.width = `${percentage}%`;
+            }
+
+            // --- Guideline: 결합도 (Coupling) ---
+            // JS는 상태(클래스)만 제어, 표현은 CSS가 담당
+            updateSlideVisibility() {
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlideIndex);
+                });
+            }
+
+            // 예측 가능성: 모든 타이머를 정리하여 슬라이드 간의 부작용 차단
+            clearAnimations() {
+                this.activeTimers.forEach(timerId => clearTimeout(timerId));
+                this.activeTimers = [];
+                // 동적으로 생성된 SVG/DOM 요소 제거
+                this.slides.forEach(slide => {
+                    const visualizers = slide.querySelectorAll('.visualizer');
+                    visualizers.forEach(v => v.innerHTML = '');
+                });
+            }
+
+            // --- Guideline: 응집도 (Cohesion) ---
+            // 각 시각화 로직을 고유 함수로 캡슐화
+            runSlideAnimations(index) {
+                const slideId = this.slides[index].dataset.slideId;
+                switch (slideId) {
+                    case '1': this.createFlowAnimation(); break;
+                    case '2': this.createLossAnimation(); break;
+                    case '3': this.createGradientDescentAnimation(); break;
+                    case '4': this.createMinibatchAnimation(); break;
+                    case '5': this.createActivationRoleAnimation(); break;
+                    case '6': this.createActivationGraphAnimation(); break;
+                }
+            }
+            
+            // --- 응집도 높은 시각화 함수들 ---
+            createFlowAnimation() {
+                const visualizer = document.getElementById('flow-visualizer');
+                if (!visualizer) return;
+                visualizer.innerHTML = `
+                    <svg viewBox="0 0 500 80" style="width: 100%; height: auto;">
+                        <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2979FF"/></marker></defs>
+                        <text x="50" y="20" fill="#E0E0E0">Input</text>
+                        <text x="200" y="20" fill="#E0E0E0">Network</text>
+                        <text x="380" y="20" fill="#E0E0E0">Output</text>
+                        
+                        <path id="ff-path" d="M 50 40 H 450" stroke-width="2" stroke="#2979FF" fill="none" marker-end="url(#arrow)" stroke-dasharray="800" stroke-dashoffset="800">
+                            <animate attributeName="stroke-dashoffset" from="800" to="0" dur="2s" begin="0.5s" fill="freeze" />
+                        </path>
+                        <path id="bp-path" d="M 450 60 H 50" stroke-width="2" stroke="#FF5252" fill="none" marker-end="url(#arrow)" stroke-dasharray="800" stroke-dashoffset="800">
+                             <animate attributeName="stroke-dashoffset" from="800" to="0" dur="2s" begin="2.5s" fill="freeze" />
+                        </path>
+                    </svg>
+                `;
+            }
+            
+            createLossAnimation() {
+                const visualizer = document.getElementById('loss-visualizer');
+                if (!visualizer) return;
+                visualizer.innerHTML = `
+                    <svg viewBox="0 0 300 200">
+                        <path d="M 20 180 C 80 10, 220 10, 280 180" stroke="#E0E0E0" stroke-width="2" fill="none"/>
+                        <circle cx="80" cy="53" r="8" fill="var(--accent-red)">
+                            <animateMotion dur="2s" begin="1s" fill="freeze" path="M 0 0 C 40 -43, 100 -43, 150 0" />
+                        </circle>
+                        <text x="85" y="45" font-size="12" fill="#fff">현재 손실 (High)</text>
+                        <text x="155" y="190" font-size="12" fill="var(--accent-green)">최소 손실 (Goal)</text>
+                    </svg>
+                `;
+            }
+            
+            createGradientDescentAnimation() {
+                const visualizer = document.getElementById('gradient-descent-visualizer');
+                if (!visualizer) return;
+                visualizer.innerHTML = `<svg viewBox="0 0 300 200"></svg>`;
+                const svg = visualizer.firstElementChild;
+                svg.innerHTML = `
+                    <path d="M 20 180 C 80 10, 220 10, 280 180" stroke="#E0E0E0" stroke-width="2" fill="none"/>
+                    <circle id="gd-ball" cx="50" cy="110" r="6" fill="var(--accent-blue)"/>
+                `;
+                const ball = svg.querySelector('#gd-ball');
+                const steps = [ {cx: 50, cy: 110}, {cx: 75, cy: 58}, {cx: 100, cy: 30}, {cx: 125, cy: 20}, {cx: 150, cy: 18} ];
+                let currentStep = 0;
+                const animate = () => {
+                    if(currentStep >= steps.length) return;
+                    ball.setAttribute('cx', steps[currentStep].cx);
+                    ball.setAttribute('cy', steps[currentStep].cy);
+                    currentStep++;
+                    const timer = setTimeout(animate, 500);
+                    this.activeTimers.push(timer);
+                };
+                const startTimer = setTimeout(animate, 500);
+                this.activeTimers.push(startTimer);
+            }
+            
+            createMinibatchAnimation() {
+                const visualizer = document.getElementById('minibatch-visualizer');
+                if (!visualizer) return;
+                visualizer.style.display = 'flex';
+                visualizer.style.alignItems = 'center';
+                visualizer.style.justifyContent = 'center';
+                visualizer.style.gap = '2rem';
+                visualizer.innerHTML = `
+                    <div id="full-data" style="width: 150px; height: 150px; border: 2px solid #555; display: flex; flex-wrap: wrap; padding: 5px; gap: 5px; position: relative;">
+                        <div id="batch-highlight" style="position: absolute; width: 50px; height: 50px; background: rgba(41, 121, 255, 0.3); border: 1px solid var(--accent-blue); transition: all 0.5s ease;"></div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right-long" style="font-size: 2rem;"></i>
+                    <div style="width: 100px; height: 100px; background: var(--bg-card); border: 2px dashed var(--accent-blue); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--accent-blue);">Batch Processing</div>
+                `;
+                const fullData = document.getElementById('full-data');
+                for (let i = 0; i < 25; i++) {
+                    const dot = document.createElement('div');
+                    dot.style.width = '20px';
+                    dot.style.height = '20px';
+                    dot.style.background = '#777';
+                    dot.style.borderRadius = '3px';
+                    fullData.appendChild(dot);
+                }
+                const highlight = document.getElementById('batch-highlight');
+                let pos = 0;
+                const moveHighlight = () => {
+                    const x = (pos % 3) * 50 + 5;
+                    const y = Math.floor(pos / 3) * 50 + 5;
+                    highlight.style.transform = `translate(${x}px, ${y}px)`;
+                    pos = (pos + 1) % 9;
+                    const timer = setTimeout(moveHighlight, 1000);
+                    this.activeTimers.push(timer);
+                };
+                const startTimer = setTimeout(moveHighlight, 500);
+                this.activeTimers.push(startTimer);
+            }
+
+            createActivationRoleAnimation() {
+                const visualizer = document.getElementById('activation-role-visualizer');
+                if (!visualizer) return;
+                visualizer.innerHTML = `
+                    <svg viewBox="0 0 400 150">
+                        <defs><marker id="arrow-act" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fff" /></defs>
+                        <g transform="translate(0, 40)">
+                            <text x="50" y="-10" fill="#fff">활성화 함수 없음 (선형)</text>
+                            <path d="M 10 0 H 190" stroke="var(--accent-red)" stroke-width="3" marker-end="url(#arrow-act)" />
+                        </g>
+                        <g transform="translate(0, 110)">
+                            <text x="50" y="-10" fill="#fff">활성화 함수 있음 (비선형)</text>
+                            <path d="M 10,0 C 40,-60 100,80 190,0" stroke="var(--accent-green)" stroke-width="3" fill="none" marker-end="url(#arrow-act)" />
+                        </g>
+                    </svg>
+                `;
+            }
+
+            createActivationGraphAnimation() {
+                const visualizer = document.getElementById('activation-graph-visualizer');
+                if (!visualizer) return;
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttribute("viewBox", "-5 -2 10 4");
+                visualizer.appendChild(svg);
+
+                const paths = {
+                    'ReLU': 'M -5 0 L 0 0 L 5 2.5',
+                    'Sigmoid': 'M -5 -1.8 C -2 -1.8, -1 -1, 0 0 C 1 1, 2 1.8, 5 1.8',
+                    'Leaky ReLU': 'M -5 -0.5 L 0 0 L 5 2.5'
+                };
+
+                const drawGraph = (name) => {
+                    svg.innerHTML = `
+                        <line x1="-5" y1="0" x2="5" y2="0" stroke-width="0.05" stroke="#555"/>
+                        <line x1="0" y1="-2" x2="0" y2="2" stroke-width="0.05" stroke="#555"/>
+                        <path id="act-path" d="${paths[name]}" stroke-width="0.1" stroke="var(--accent-blue)" fill="none" stroke-dasharray="100" stroke-dashoffset="100">
+                            <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" fill="freeze" />
+                        </path>
+                    `;
+                }
+                
+                const activeCard = document.querySelector('.act-card.active');
+                if (activeCard) {
+                    drawGraph(activeCard.dataset.func);
+                }
+
+                document.querySelectorAll('.act-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        document.querySelectorAll('.act-card').forEach(c => c.classList.remove('active'));
+                        card.classList.add('active');
+                        drawGraph(card.dataset.func);
+                    });
+                });
+            }
+        }
+
+        // DOM이 완전히 로드된 후 프레젠테이션 컨트롤러를 초기화합니다.
+        document.addEventListener('DOMContentLoaded', () => {
+            new PresentationController('#presentation-container');
+        });
+    </script>
+</body>
+</html>

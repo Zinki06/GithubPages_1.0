@@ -1,0 +1,8 @@
+{
+    "id": "project8",
+    "title": " 학습 가이드",
+    "description": "웹 개발의 핵심 언어인 JavaScript를 체계적으로 학습할 수 있는 인터랙티브 웹 프레젠테이션입니다. 기본 문법부터 고급 개념까지 단계별로 학습하세요.",
+    "thumbnail": "gradient-8",
+    "tags": ["JavaScript", "교육", "HTML"],
+    "status": "완료"
+} 
